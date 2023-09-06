@@ -1,0 +1,224 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+/*container*/
+.idx_top {
+  width: 100%;
+  height: 350px;
+  padding: 150px 0px 50px 0px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    url(../img/portugal2-3.png);
+  background-size: cover;
+  background-position: center center;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+.main_top_title {
+  width: 100%;
+  min-width: 1000px;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* border : 1px solid red; */
+  color: white;
+  font-size: 69px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 0px;
+  display: block;
+  text-shadow: 0.5px 0.5px 0.5px rgb(0, 0, 0);
+}
+
+.main_top_sub {
+  text-align: center;
+  padding-top: 15px;
+  /* border : 1px solid rgb(53, 8, 8); */
+  font-size: 34px;
+  color: white;
+  /* font-weight: bold; */
+  text-shadow: 0.5px 0.5px 0.5px rgb(0, 0, 0);
+}
+
+.idx_top h2,
+.idx_top p {
+  color: rgb(255, 255, 255);
+  top: 1px;
+  padding: 10px;
+  text-align: center;
+  text-shadow: 0.5px 0.5px 0.5px rgb(104, 104, 104);
+}
+
+.idx_top h2 {
+  font-size: 60px;
+  letter-spacing: -2px; /*글자 사이간격*/
+  /* position: fixed; */
+}
+
+.idx_top p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 29px;
+}
+
+/* 검색창 */
+.search-box {
+  padding: 10px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30px;
+  background-color: #f8f8fa;
+  border: 2px solid #000d88;
+  border-radius: 30px;
+  transition: 0.4s;
+  width: 390px;
+}
+
+.search-box:hover {
+  box-shadow: 0px 0px 0.5px 1px #ffffff;
+}
+.search-btn2 {
+  width: 27px;
+  float: right;
+  padding-right: 5px;
+}
+.search-box:hover > .search-btn {
+  background-color: #fff;
+}
+.search-txt {
+  display: flex;
+  width: 0px;
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  font-size: 1rem;
+  line-height: 30px;
+  transition: 0.4s;
+}
+.search-box:hover > .search-txt {
+  width: 240px;
+  padding: 0 10px;
+}
+
+/*게시판 목록*/
+.idx_board_wrap {
+  padding: 87px 0;
+  background: #eaf3fb;
+}
+
+.idx_board_wrap > div {
+  width: 1200px;
+  min-width: 1000px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0; /*게시판들 사이여백 없애기*/
+}
+
+.idx_board {
+  display: inline-block;
+  width: 48%;
+  background: #fff;
+  border-radius: 20px;
+  /* box-shadow: 0px 0px 0.5px 1px #dfdfdf; */
+  box-shadow: rgba(25, 25, 25, 0.2) 0px 6px 10px;
+}
+
+.idx_board_wrap > div > div:nth-child(even) {
+  /*even-짝수 여기선 게시판 2번4번*/
+  margin-left: 4%; /*게시판들 사이 여백 4%*/
+}
+
+.idx_board_wrap > div > div:nth-child(3),
+.idx_board_wrap > div > div:nth-child(4) {
+  margin-top: 40px;
+}
+
+.idx_board .title {
+  position: relative;
+  padding: 20px;
+  padding-left: 35px;
+  border-bottom: 1px solid #dedee0;
+  background-color: #a0bbff;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.idx_board .title a {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.idx_board .title .name {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -2px;
+}
+
+.idx_board .title .more {
+  position: absolute;
+  top: 25;
+  right: 20px;
+}
+
+.idx_board .title .more img {
+  width: 24px;
+  margin-top: 3px;
+  margin-left: 3px;
+  padding-right: 9px;
+}
+.idx_board .list {
+  padding: 20px 30px 30px 30px;
+}
+
+.idx_board .list ul li {
+  /* background-color: #000d88; */
+  padding-left: 3px;
+  margin-top: 14px;
+  font-size: 0;
+  vertical-align: middle;
+}
+
+.idx_board .list ul li:first-child {
+  margin-top: 0;
+}
+
+.idx_board .list a,
+.idx_board .list span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.idx_board .list a {
+  /*.idx_board .list (ul li) 생략 a*/
+  width: 80%;
+  font-size: 16px;
+  text-align: left;
+}
+
+.idx_board .list span {
+  width: 20%;
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+}
+
+.list li a img {
+  width: 23px;
+  padding-right: 8px;
+  vertical-align: bottom;
+}

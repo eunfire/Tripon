@@ -1,0 +1,217 @@
+@charset "UTF-8";
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: #444444;
+}
+
+.sub-mene-div {
+  display: flex;
+  position: relative;
+  left: 2px;
+  margin-right: 1px;
+}
+
+#logo {
+  float: left;
+  margin: 20px 0 0 20px;
+}
+#menus {
+  float: right;
+}
+#top_menu {
+  text-align: right;
+  margin-top: 20px;
+}
+#main_menu {
+  margin-top: 20px;
+  font-size: 20px;
+  color: black;
+}
+html {
+  font-size: 10px;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.board_wrap {
+  width: 1200px;
+}
+
+.board-title-searchbar-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-position: center center;
+}
+
+.board_title {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board_title strong {
+  font-size: 3rem;
+  top: 20px;
+  margin: 0 0 5px 0;
+}
+
+.board_title p {
+  font-size: 1.4rem;
+}
+
+.board-page-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bt_wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.bt_wrap a {
+  display: inline-block;
+  min-width: 80px;
+  margin-left: 100px;
+  padding: 10px;
+  border: 1px solid #0e52ea;
+  border-radius: 12px;
+  font-size: 1.4rem;
+}
+
+.bt_wrap a.on {
+  background: #0e52ea;
+  text-align: center;
+  color: #fff;
+}
+.board_list {
+  top: 50;
+  width: 100%;
+  border: solid 5px #f0f0f0;
+  border-radius: 20px;
+  margin: 0 0 30px 0;
+}
+.board_list > div {
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0;
+}
+.board_list > div.top {
+  border-bottom: 1px solid #f0f0f0;
+}
+.board_list > div:last-child {
+  border-bottom: 0px solid #000;
+}
+.board_list > div > div {
+  display: inline-block;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 1.4rem;
+}
+.board_list > div.top > div {
+  font-weight: 600;
+}
+.board_list .num {
+  width: 10%;
+}
+.board_list .title {
+  width: 40%;
+  text-align: left;
+}
+.board_list .top .title {
+  text-align: center;
+}
+.board_list .writer {
+  width: 20%;
+}
+.board_list .date {
+  width: 20%;
+}
+.board_list .count {
+  width: 10%;
+}
+.board_page {
+  text-align: center;
+  font-size: 0;
+}
+.board_page a {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  /* box-sizing: border-box; */
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  border-left: 0;
+  line-height: 100%;
+}
+.board_page a.bt {
+  padding-top: 10px;
+  font-size: 1.2rem;
+}
+.board_page a.num {
+  padding-top: 9px;
+  font-size: 1.4rem;
+}
+.board_page a.num.on {
+  border-color: #001ba0;
+  background: #001ba0;
+  color: #fff;
+}
+.board_page a:first-child {
+  border-left: 1px solid #ddd;
+}
+
+
+/* 게시판 검색창 */
+.search-box {
+  margin: auto;
+  display: flex;
+  width: 350px;
+  height: 39px;
+  background-color: #f8f8fa;
+  border: 2px solid #000e88aa;
+  border-radius: 30px;
+  transition: 0.4s;
+  margin-bottom: 75px;
+}
+
+.search-btn2 {
+  width: 23px;
+  float: right;
+  padding: 8px 15px 0px 10px;
+  /* border: 1px solid blue; */
+}
+
+.search-txt {
+  display: flex;
+  width: 0px;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 18px;
+  line-height: 30px;
+  transition: 0.4s;
+  width: 290px;
+  padding: 0px 10px 0px 20px;
+}

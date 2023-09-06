@@ -1,0 +1,198 @@
+@charset "UTF-8";
+/*전체 초기화*/
+*{
+	margin: 0;
+	padding: 0;
+}
+
+	
+
+ul, li {
+	list-style: none; /*글머리 태그 없애기*/
+}
+a{
+	text-decoration: none;/*a태그 밑줄 지우기*/
+	color: inherit;/*a태그 글자색 부모에게 물려받기*/
+}
+
+.card_wrap {
+	width: 100%;/*.card_wrap 전체 너비의 90% 사용*/
+	min-width: 1000px;/*.card_wrap의 너비 최소값*/
+	max-width: 1200px;/*.card_wrap의 너비 최대값*/
+	margin: 0 auto;/*가운데 정렬*/
+	padding: 100px;/*.card_wrap 요소의 안쪽 여백(padding)을 100px로 설정하는 속성*/
+	
+
+}
+
+
+.TravelBuddy {
+	display: flex;
+	justify-content: space-between; /* p와 a 요소를 왼쪽과 오른쪽 끝으로 배치 */
+	align-items: center; /* 요소를 수직 방향으로 중앙에 배치 */
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 10%;
+  }
+
+.TravelBuddy p {
+	font-size: 25px;
+	font-weight: 700;
+	border-bottom: 2px solid blue;
+	
+}
+
+.TravelBuddy a{
+	font-size: 15px;
+	color: #0e52ea;
+	padding-top: 10px;
+	
+}
+
+.trip_diary {
+	display: flex;
+	justify-content: space-between; /* p와 a 요소를 왼쪽과 오른쪽 끝으로 배치 */
+	align-items: center; /* 요소를 수직 방향으로 중앙에 배치 */
+	margin-left: 2%;
+	margin-right: 2%;
+  }
+
+.trip_diary p {
+	font-size: 25px;
+	font-weight: 700;
+	border-bottom: 2px solid blue;
+}
+
+.trip_diary a{
+	font-size: 15px;
+	color: #0e52ea;
+	padding-top: 10px;
+}
+
+/*ul*/
+.card_wrap ul {
+	font-size: 0; /*item과 item 사이의 간격 없애기*/
+}
+
+/*li*/
+.card_wrap .item {
+	display: inline-block; /*한줄에 3개 넣기 위해 inline-block 처리(안하면 한줄에 li 한개 들어감)*/
+	width: 22.5%; /*가로*/ /*한줄에 3개 넣기 위해 li사이즈 줄이기(한줄에 넣고 싶은 개수 퍼센트 계산하여 수정하기)*/
+	margin-top: 40px;/*위쪽 공간 40px 벌어짐 */
+	margin-left: 2%; /*왼쪽 공간 5% 벌어짐(4% 20% 4% 20% 이런식으로) 맨 처음도 5% 벌어짐*/
+	box-shadow: rgba(25, 25, 25, 0.3) 5px 6px 10px;/*x값 y값 흐려지는정도 색*/
+	border-radius: 14px;
+	
+}
+/*.card_wrap  .item {margin-top: 40px;}로 인해 맨앞 5% 벌어진것 없애기*/
+.card_wrap .item:nth-child(-n+4) { /* "-n+2"는 "n이 2보다 작거나 같을 때"를 의미(1,2) 따라서, 이 수식을 사용하면 2번째 요소부터 선택*/
+	margin-top: 0; /*맨 위 공간 없애기*/
+}
+
+/*.card_wrap  .item {margin-left: 5%;}로 인해 맨앞 5% 벌어진것 없애기*/
+/*.card_wrap .item:nth-child(4n-3) {/*nth-child():지정된 요소 집합에서 특정 순서를 가진 요소들을 선택하는 데 사용*/ /*2n-1:한줄에 2개씩 나열했을때 줄마다 맨앞*/
+/*	margin-left: 0; /*맨 왼쪽 공간 없애기*/
+/*}*/
+
+.card_wrap .item a {/*a태그는 inline 태그*/
+	display: block;/*a태그는 inline 태그이므로 padding을 쓰기 위해 인라인-블록 처리(inline-block 한줄 다 차지 하지 않는 적당한 크기의 블록)*/
+	/*margin-top: 10px; /*a태그 테두리 기준 위에 10px 공간 만들기*/
+	/*padding: 5px 10px;/*테두리 안쪽 상하 좌우 여백 만들기*/
+	border: 1px solid rgb(217, 217, 255);/*테두리
+	/*background: #eee;/*테두리 안쪽 배경 색*/
+	/*font-size: 13px;/*.card_wrap ul{font-size: 0;}에서 폰트사이즈가 0으로 되어있어서 a태그 보이게 폰트사이즈 조절*/
+	/*letter-spacing: -1px;/*글자 사이 간격(자간) 조절*/
+	border-radius: 14px;
+}
+
+/*li안의 제목*/
+.card_wrap .item .party {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 10px;
+	width: 270px;
+	height: 50px;
+}
+.card_wrap .item .lefthalf {
+	flex-basis: 30%;
+	border-right: 1px solid rgb(217, 217, 255);
+	font-size: 19px;
+	text-align: center;
+	display: flex; /* Flexbox를 적용 */
+    align-items: center; /* 요소의 수직 정렬을 가운데로 설정 */
+    justify-content: center; /* 수평 중앙 정렬 */
+	
+}
+
+.card_wrap .item .righthalf {
+	flex-basis: 69%;
+	width: 100%;
+	font-size: 13px;
+	text-align: center;
+	height: 100%;
+	justify-content: center;
+}
+
+.topright {
+	padding-top: 7px;
+	color: #808080;
+}
+
+.bottomright {
+	color: #0e52ea;
+}
+
+.card_wrap .item a:hover .righthalf {
+	background-color: #e6e6e6;
+	border-top-right-radius: 13px;
+}
+/*li안의 사진*/
+.card_wrap .item .image {
+	width: 100%; /*가로*/ /*li의 가로(30%) 에서 100% 차지*/
+	height: 200px; /*세로*/
+	/*margin-top: 10px;/*사진 윗 공간 50px*/
+	background-color: #ddd; /*이미지 영역 확인하기위해 넣어 놓음*/
+	background-repeat: no-repeat; /*사진 반복 x*/
+	background-position: 50% 50%; /*배경 이미지를 요소의 중앙에 위치시키는 것*/
+	background-size: cover; /*.card_wrap .item 의 box-shadow부분을 꽉 채워준다 이미지가 잘리거나 비율이 꺠지지 않고 완전히 채울 수 있다*/
+	border-top-right-radius: 14px;
+	border-top-left-radius: 14px;
+}
+
+/*사진*/
+.card_wrap .item1 .image {background-image: url(../img/img1.jpg);}
+.card_wrap .item2 .image {background-image: url(../img/img2.jpg);}
+.card_wrap .item3 .image {background-image: url(../img/img3.jpg);}
+.card_wrap .item4 .image {background-image: url(../img/img4.jpg);}
+.card_wrap .item5 .image {background-image: url(../img/img5.jpg);}
+.card_wrap .item6 .image {background-image: url(../img/img6.jpg);}
+.card_wrap .item7 .image {background-image: url(../img/img7.jpg);}
+.card_wrap .item8 .image {background-image: url(../img/img8.jpg);}
+
+
+.card_wrap .item .cont {
+	padding: 12px;/*요소의 내부 공간 늘릴때 사용*/
+}
+
+/*strong태그*/
+.card_wrap .item strong {/*strong태그는 inline 태그*/
+	display: block;/*strong태그는 inline 태그이므로 margin을 쓰기 위해 블록 처리(block 한줄 다 차지하는 블록)*/
+	margin: 0 0 10px 0;/*strong 기준으로 위 15px 아래10px 공간 조절*/
+	font-size: 16px; /*.card_wrap ul{font-size: 0;}에서 폰트사이즈가 0으로 되어있어서 strong태그 보이게 폰트사이즈 조절 */
+	letter-spacing: -1px; /*글자 사이 간격(자간) 조절*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/*p태그*/
+.card_wrap .item p {
+	font-size: 15px;/*.card_wrap ul{font-size: 0;}에서 폰트사이즈가 0으로 되어있어서 p태그 보이게 폰트사이즈 조절*/
+	letter-spacing: -1px;/*글자 사이 간격(자간) 조절*/
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;/*범위 벗어나면 ... 표시*/
+	display: -webkit-box;
+	-webkit-line-clamp: 2;/*두줄까지 표시*/
+	-webkit-box-orient: vertical;/*텍스트를 세로 방향으로 표시*/
+}

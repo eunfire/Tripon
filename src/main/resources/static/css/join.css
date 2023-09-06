@@ -1,0 +1,166 @@
+.body{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    background-color: #f7f7f7;
+    display: block;
+    justify-content: center;
+    margin-top: 150px;
+    padding: 0;
+  }
+
+  /** body 안의 실제 컨텐츠 영역 */
+  .main-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 1200px;
+    min-width: 1000px;
+    max-width: 1200px;
+    background-color: white;
+    padding: 0px;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* 중앙 정렬 */
+    margin-bottom: 50px;
+  }
+
+.logo img{
+    margin: 200px 0px 30px;
+    font-size: 50px;
+    font-weight: bold;  
+    width : 350px;
+    text-align: center;
+}
+
+.logo a{
+    color :#0020ff	;
+    text-decoration: none;
+}
+.text{
+    font-size: 40px;
+    color : #5a5858;
+    
+    margin-bottom: 20px;
+
+}
+.id{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232;  
+}
+.id input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.pw{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.pw input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.checkpw{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.checkpw input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.name{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.name input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.nickname{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.nickname input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.phone{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.phone input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.email{
+    font-size : 15px;
+    margin-bottom: 10px;
+    color :#323232; 
+}
+.email input{
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #000000;
+    border: 3px solid #828282;
+    margin-top: 10px;
+}
+.btn input{
+    margin-top: 20px;
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #0020ff;
+    color : #FAEBCD;
+    font-size: 20px;
+    font-weight: bolder;  
+    margin-bottom: 50px;
+}
+.hide {
+  display: none;
+}
