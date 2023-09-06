@@ -1,4 +1,4 @@
-package controller;
+package com.example.tripon.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
