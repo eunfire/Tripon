@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,10 +8,10 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="./css/style.css" />
-<link rel="stylesheet" href="./css/nav.css" />
-<link rel="stylesheet" href="./css/footer.css" />
-<script src="./js/navbar.js" defer></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<script th:src="@{/js/navbar.js}" defer></script>
 <title>게시물 작성 페이지</title>
 </head>
 <body>
@@ -76,7 +76,7 @@
             </svg>
 								<h1>트립온 게시글 작성</h1>
 							</div>
-							<form id="post-form">
+							<form id="post-form" th:action="@{/FreeBoard/writer}" method="post">
 								<div class="category-title-wrapper">
 									<div class="post-category">
 										<label for="postCategory"></label> <input id="postCategory"
