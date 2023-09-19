@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="./css/footer.css" />
-<link rel="stylesheet" href="./css/nav.css" />
-<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
 <script src="./js/navbar.js" defer></script>
 <title>게시물 상세 페이지</title>
 </head>
@@ -21,7 +21,7 @@
 		<div class="containner_nav">
 			<nav class="head">
 				<div class="logo">
-					<a href="main.html"> <img src="img/logo-img2.png" />
+					<a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
 					</a>
 				</div>
 
@@ -83,7 +83,7 @@
 							<main class="main">
 								<div class="board_view_wrap">
 									<div class="board_view">
-										<div class="title">따뜻한 태양의 나라 스페인 방문기</div>
+										<div class="title" th:text="${post.title}"></div>
 										<div class="info2">
 											<div class="info2_left">
 												<dl>
@@ -94,28 +94,21 @@
 
 											<div class="info2_right">
 												<dl>
-													<dt>글쓴이</dt>
-													<dd>트립온</dd>
+													<dt><span th:text="${post.memId}"></span></dt>
 												</dl>
 
 												<dl>
-													<dt>작성일</dt>
-													<dd>2023.5.8</dd>
+													<dt><span th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></span></dt>
+
 												</dl>
 
 												<dl>
-													<dt>조회</dt>
-													<dd>22</dd>
+													<dt><span th:text="${post.views}"></span></dt>
 												</dl>
 											</div>
 										</div>
 
-										<div class="cont">
-											글 내용이 들어갑니다<br /> 글 내용이 들어갑니다<br /> 글 내용이 들어갑니다<br /> 글
-											내용이 들어갑니다<br /> 글 내용이 들어갑니다<br /> 글 내용이 들어갑니다<br /> 글 내용이
-											들어갑니다<br /> 글 내용이 들어갑니다<br /> 글 내용이 들어갑니다<br /> 글 내용이
-											들어갑니다<br />
-										</div>
+										<div class="cont" th:text="${post.content}"></div>
 									</div>
 								</div>
 								<div class="post-actions">
@@ -177,7 +170,7 @@
 		<footer>
 			<div class="container_footer">
 				<div class="logo_line">
-					<span class="logo2"> <img src="./img/logo-img2.png" />
+					<span class="logo2"> <img th:src="@{/img/logo-img2.png}"/>
 					</span>
 				</div>
 
