@@ -10,11 +10,11 @@ public class SignupController {
 
     @GetMapping("/join")
     public String join() {
-        return "/join";
+        return "signup";
     }
 
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "signin";
     }
 }

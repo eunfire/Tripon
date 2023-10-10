@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./css/login.css">
+<link rel="stylesheet" href="./css/join.css">
 <link rel="stylesheet" href="./css/footer.css">
-<title>Login</title>
+<script src="./js/navbar.js" defer></script>
+<title>Join</title>
 <script src="https://kit.fontawesome.com/7aca531ae5.js"
 	crossorigin="anonymous">
 	
 </script>
-<script defer src="./js/login.js"></script>
+<script src="Verification.js"></script>
+<!-- <script src="join.js"></script> 
+    적용시 유효성검사 오류 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -24,26 +27,59 @@
 			<div class="logo">
 				<a href="main.html"><img src="img/logo-img2.png"></a>
 			</div>
-			<div class="text">Enjoy your trip</div>
+
+			<div class="text">환영합니다</div>
 			<div class="id">
-				아이디<br> <input type="text" value=" ID">
+				아이디<br> <input type="text" maxlength='11' id="username"
+					placeholder=" ID">
 			</div>
+			<div class="success-message hide" style="color: #1DDB16">사용가능한
+				아이디입니다.</div>
+			<div class="failure-message hide" style="color: #FF0000">4~11자
+				이내의 영문, 숫자만 사용 가능합니다.</div>
 			<div class="pw">
-				비밀번호<br> <input type="text" value=" 비밀번호">
+				비밀번호<br> <input type="text" maxlength='14' id="password"
+					placeholder="비밀번호">
 			</div>
+			<div class="miss-message hide" style="color: #FF0000">8~14자 이내의
+				영문, 숫자, 특수문자가 포함되어야 사용 가능합니다.</div>
+			<div class="success-password hide" style="color: #1DDB16">사용가능한
+				비밀번호입니다.</div>
+			<div class="checkpw">
+				비밀번호 확인<br> <input type="text" maxlength='14'
+					id="password-retype" placeholder=" 비밀번호 확인">
+			</div>
+			<div class="mismatch-message hide" style="color: #FF0000">비밀번호가
+				일치하지 않습니다.</div>
+			<div class="success-passwordRe hide" style="color: #1DDB16">비밀번호가
+				일치합니다.</div>
+			<div class="name">
+				이름<br> <input type="text" placeholder=" 이름">
+			</div>
+			<div class="nickname">
+				닉네임<br> <input type="text" placeholder=" 활동하실 닉네임을 알려주세요!">
+			</div>
+			<div class="phone">
+				휴대폰 번호<br> <input type="text" maxlength='11' id="cellPhone"
+					placeholder=" 01012345678">
+			</div>
+			<div class='miss-phone hide' style="color: #FF0000">유효하지 않은 전화
+				번호입니다. 다시 시도해 주세요</div>
+			<div class="success-phone hide" style="color: #1DDB16">사용가능한
+				번호입니다.</div>
+			<div class="email">
+				이메일<br> <input type="text" id="email" placeholder=" 이메일">
+			</div>
+			<div class="emsuccess-email hide" style="color: #1DDB16">이메일이
+				확인되었습니다.</div>
+			<div class="emfailure-message hide" style="color: #FF0000">이메일
+				양식에 맞지않습니다.</div>
 			<div class="btn">
-				<input type="button" value="로그인">
-			</div>
-			<div class="inlinebox">
-				<div class="search">
-					<a href="#">아이디 및 비밀번호 찾기</a>
-				</div>
-				<div class="join">
-					<a href="join.html">신규 회원가입</a>
-				</div>
+				<input type="button" value=" 회원가입">
 			</div>
 		</div>
 	</div>
+
 	<footer>
 		<div class="container_footer">
 			<div class="logo_line">
@@ -81,5 +117,7 @@
 			<p>Copyright © TRIPON Inc. All Rights Reserved.</p>
 		</div>
 	</footer>
+
+	<script src="./js/Validity.js"></script>
 </body>
 </html>
