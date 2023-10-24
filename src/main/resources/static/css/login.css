@@ -81,7 +81,7 @@ body {
     margin-top: 10px;
     
 }
-.btn input{
+.btn button{
     margin-top: 50px;
     margin-bottom: 10px;
     width : 400px;
@@ -99,7 +99,6 @@ body {
    font-size : 15px;
    text-decoration: none;
    color : #323232;
-   padding: 65px;
 
 }
 .join a{
