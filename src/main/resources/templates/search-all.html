@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
 <head>
-<meta charset="UTF-8" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="./css/GenBoardStyle.css" />
-<link rel="stylesheet" href="./css/nav.css" />
-<link rel="stylesheet" href="./css/style.css" />
-<link rel="stylesheet" href="./css/footer.css" />
+	<meta charset="UTF-8" />
+	<link rel="preconnect" th:href="@{https://fonts.googleapis.com}"/>
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
+	<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
+			rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/GenBoardStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
 
-<script src="https://kit.fontawesome.com/7aca531ae5.js"
-	crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/83aa94ddcc.js"
-	crossorigin="anonymous"></script>
-<script src="./js/navbar.js" defer></script>
+	<script src="https://kit.fontawesome.com/7aca531ae5.js"
+			crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/83aa94ddcc.js"
+			crossorigin="anonymous"></script>
+	<script src="./js/navbar.js" defer></script>
 <title>검색 결과 : 전체 게시판</title>
 </head>
 <body>
@@ -57,8 +57,8 @@
 				</ul>
 
 				<ul class="member">
-					<a href="signin.html"><li>로그인</li></a>
-					<a href="signup.html"><li>회원가입</li></a>
+					<a href="signup.html"><li>로그인</li></a>
+					<a href="join.html"><li>회원가입</li></a>
 				</ul>
 
 				<!-- <ul class="info">
@@ -95,98 +95,18 @@
 										<div class="date">등록일</div>
 										<div class="count">조회</div>
 									</div>
-									<div>
-										<div class="num">10</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
+									<th:block th:each="post : ${posts}">
+										<div>
+											<div class="num" th:text="${post.boardId}">1</div>
+											<div class="title">
+												<a th:href="@{/Main/post/{postId}(postId=${post.boardId})}" th:text="${post.title}"></a>
+											</div>
+											<div class="writer" th:text="${post.memId}"></div>
+											<div class="date" th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></div>
+											<div class="count" th:text="${post.views}"></div>
 										</div>
-										<div class="writer">작성자5</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">0</div>
-									</div>
-									<div>
-										<div class="num">9</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자4</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">2</div>
-									</div>
-									<div>
-										<div class="num">8</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자3</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">7</div>
-									</div>
-									<div>
-										<div class="num">7</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자2</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">15</div>
-									</div>
-									<div>
-										<div class="num">6</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
-									<div>
-										<div class="num">5</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
-									<div>
-										<div class="num">4</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
-									<div>
-										<div class="num">3</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
-									<div>
-										<div class="num">2</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
-									<div>
-										<div class="num">1</div>
-										<div class="title">
-											<a href="post-detail.html">게시글 제목</a>
-										</div>
-										<div class="writer">작성자1</div>
-										<div class="date">2023.05.08</div>
-										<div class="count">107</div>
-									</div>
+									</th:block>
 								</div>
-
 								<div class="board-page-wrapper">
 									<div class="board_page">
 										<a href="#" class="bt first"><<</a> <a href="#"
@@ -224,7 +144,7 @@
 		<footer>
 			<div class="container_footer">
 				<div class="logo_line">
-					<span class="logo2"> <img src="./img/logo-img2.png" />
+					<span class="logo2"> <img th:src="@{/img/logo-img2.png}"/>
 					</span>
 				</div>
 
@@ -234,7 +154,7 @@
 						<li><a href="notice-board.html">공지사항</a></li>
 						<li><a href="local-information-board.html">국내여행</a></li>
 						<li><a href="world-information-board.html">해외여행</a></li>
-						<li><a href="free-board.html">커뮤니티</a></li>
+						<li><a href="/Community/FreeBoard">커뮤니티</a></li>
 					</ul>
 				</div>
 

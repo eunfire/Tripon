@@ -14,7 +14,12 @@ public class BoardDTO {
     private String memId;
     private int cateId;
     private String title;
+    private LocalDateTime tStart;
+    private LocalDateTime tEnd;
+    private int tMember;
     private String content;
     private LocalDateTime createdTime;
     private int views;
+    private LocalDateTime editTime;
 }
+
