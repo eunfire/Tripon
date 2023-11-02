@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./css/join.css">
-<link rel="stylesheet" href="./css/footer.css">
-<script src="./js/navbar.js" defer></script>
+<link rel="stylesheet" th:href="@{/css/join.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">
+<script th:src="@{/js/navbar.js}" defer></script>
 <title>Join</title>
-<script src="https://kit.fontawesome.com/7aca531ae5.js"
+<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
 	crossorigin="anonymous">
 	
 </script>
-<script src="Verification.js"></script>
+<script th:src="@{Verification.js}"></script>
 <!-- <script src="join.js"></script> 
     적용시 유효성검사 오류 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
+		th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
 	rel="stylesheet">
 </head>
 <body>
@@ -29,54 +29,49 @@
 			</div>
 
 			<div class="text">환영합니다</div>
-			<div class="id">
-				아이디<br> <input type="text" maxlength='11' id="username"
-					placeholder=" ID">
-			</div>
-			<div class="success-message hide" style="color: #1DDB16">사용가능한
-				아이디입니다.</div>
-			<div class="failure-message hide" style="color: #FF0000">4~11자
-				이내의 영문, 숫자만 사용 가능합니다.</div>
-			<div class="pw">
-				비밀번호<br> <input type="text" maxlength='14' id="password"
-					placeholder="비밀번호">
-			</div>
-			<div class="miss-message hide" style="color: #FF0000">8~14자 이내의
-				영문, 숫자, 특수문자가 포함되어야 사용 가능합니다.</div>
-			<div class="success-password hide" style="color: #1DDB16">사용가능한
-				비밀번호입니다.</div>
-			<div class="checkpw">
-				비밀번호 확인<br> <input type="text" maxlength='14'
-					id="password-retype" placeholder=" 비밀번호 확인">
-			</div>
-			<div class="mismatch-message hide" style="color: #FF0000">비밀번호가
-				일치하지 않습니다.</div>
-			<div class="success-passwordRe hide" style="color: #1DDB16">비밀번호가
-				일치합니다.</div>
-			<div class="name">
-				이름<br> <input type="text" placeholder=" 이름">
-			</div>
-			<div class="nickname">
-				닉네임<br> <input type="text" placeholder=" 활동하실 닉네임을 알려주세요!">
-			</div>
-			<div class="phone">
-				휴대폰 번호<br> <input type="text" maxlength='11' id="cellPhone"
-					placeholder=" 01012345678">
-			</div>
-			<div class='miss-phone hide' style="color: #FF0000">유효하지 않은 전화
-				번호입니다. 다시 시도해 주세요</div>
-			<div class="success-phone hide" style="color: #1DDB16">사용가능한
-				번호입니다.</div>
-			<div class="email">
-				이메일<br> <input type="text" id="email" placeholder=" 이메일">
-			</div>
-			<div class="emsuccess-email hide" style="color: #1DDB16">이메일이
-				확인되었습니다.</div>
-			<div class="emfailure-message hide" style="color: #FF0000">이메일
-				양식에 맞지않습니다.</div>
-			<div class="btn">
-				<input type="button" value=" 회원가입">
-			</div>
+
+			<form class="formSignup" method="post" action="/sign/signupProcess">
+				<div class="id">
+					아이디<br> <input type="text" maxlength='11' id="username" name="memId"
+						placeholder=" ID">
+				</div>
+				<div class="success-message hide" style="color: #1DDB16">사용가능한
+					아이디입니다.</div>
+				<div class="failure-message hide" style="color: #FF0000">4~11자
+					이내의 영문, 숫자만 사용 가능합니다.</div>
+				<div class="pw">
+					비밀번호<br> <input type="text" maxlength='14' id="password" name="pw"
+						placeholder="비밀번호">
+				</div>
+				<div class="miss-message hide" style="color: #FF0000">8~14자 이내의
+					영문, 숫자, 특수문자가 포함되어야 사용 가능합니다.</div>
+				<div class="success-password hide" style="color: #1DDB16">사용가능한
+					비밀번호입니다.</div>
+				<div class="checkpw">
+					비밀번호 확인<br> <input type="text" maxlength='14'
+						id="password-retype" placeholder=" 비밀번호 확인">
+				</div>
+				<div class="mismatch-message hide" style="color: #FF0000">비밀번호가
+					일치하지 않습니다.</div>
+				<div class="success-passwordRe hide" style="color: #1DDB16">비밀번호가
+					일치합니다.</div>
+				<div class="name">
+					이름<br> <input type="text" name="name" placeholder=" 이름">
+				</div>
+				<div class="nickname">
+					닉네임<br> <input type="text" name="nick" placeholder=" 활동하실 닉네임을 알려주세요!">
+				</div>
+				<div class="email">
+					이메일<br> <input type="text" id="email" name="email" placeholder=" 이메일">
+				</div>
+				<div class="emsuccess-email hide" style="color: #1DDB16">이메일이
+					확인되었습니다.</div>
+				<div class="emfailure-message hide" style="color: #FF0000">이메일
+					양식에 맞지않습니다.</div>
+				<div class="btn">
+					<button type="submit" value="회원가입">회원가입</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -118,6 +113,6 @@
 		</div>
 	</footer>
 
-	<script src="./js/Validity.js"></script>
+	<script th:src="@{/js/Validity.js}"></script>
 </body>
 </html>

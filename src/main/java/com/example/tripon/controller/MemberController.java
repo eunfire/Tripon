@@ -21,7 +21,7 @@ public class MemberController {
     }
 
     @PostMapping("/signinProcess")
-    public String login(MemberDTO dto) {
+    public String signin(MemberDTO dto) {
         boolean isValidMember = memberService.isValidMember(dto.getMemId(), dto.getPw());
         if (isValidMember)
             return "main";
@@ -29,7 +29,13 @@ public class MemberController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signuppage() {
         return "signup";
+    }
+
+    @PostMapping("/signupProcess")
+    public String signup(MemberDTO dto) {
+        memberService.signup(dto);
+        return "signin";
     }
 }

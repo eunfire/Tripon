@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface MemberRepository {
 
     Optional<Member> findByUserid(String memId);
+    void addMember(Member member);
+
 }
