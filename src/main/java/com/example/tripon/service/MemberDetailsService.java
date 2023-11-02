@@ -17,7 +17,7 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> findOne = memberService.findOne(username);
-        Member member = findOne.orElseThrow(() -> new UsernameNotFoundException("없는 회원입니다"));
+        Member member = findOne.orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다"));
 
         String role = member.isRole() ? "ADMIN" : "USER";
 

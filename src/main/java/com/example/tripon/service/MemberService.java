@@ -1,6 +1,7 @@
 package com.example.tripon.service;
 
 import com.example.tripon.domain.Member;
+import com.example.tripon.dto.MemberDTO;
 import com.example.tripon.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class MemberService {
         return member.map(value -> value.getPw().equals(pw)).orElse(false);
     }
 
-    public boolean login(String memId, String password) {
+    public boolean signin(String memId, String password) {
         Optional<Member> memberOptional = findOne(memId);
 
         if (memberOptional.isPresent()) {
@@ -39,5 +40,22 @@ public class MemberService {
         }
 
         return false;
+    }
+
+    // 회원가입
+    public void signup(MemberDTO dto) {
+        // 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(dto.getPw());
+
+        // DTO를 도메인 모델로 변환
+        Member member = new Member();
+        member.setMemId(dto.getMemId());
+        member.setPw(encodedPassword);
+        member.setName(dto.getName());
+        member.setNick(dto.getNick());
+        member.setEmail(dto.getEmail());
+
+        // 도메인 모델을 저장
+        repo.addMember(member);
     }
 }

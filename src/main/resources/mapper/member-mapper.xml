@@ -5,4 +5,9 @@
     <select id="findByUserid" parameterType="String" resultType="member">
         SELECT * FROM member WHERE memId = #{memId}
     </select>
+
+    <insert id="addMember" parameterType="member">
+        INSERT INTO member (memId, pw, name, nick, email) value(#{memId}, #{pw}, #{name}, #{nick}, #{email})
+    </insert>
+
 </mapper>
