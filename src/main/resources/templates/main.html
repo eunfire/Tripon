@@ -9,6 +9,7 @@
 	<link rel="stylesheet" th:href="@{/css/cardlist.css}">
 	<link rel="stylesheet" th:href="@{/css/mainstyle.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
 	<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
 	crossorigin="anonymous">
 	</script>
@@ -22,53 +23,7 @@
 		rel="stylesheet">
 </head>
 <body>
-	<header>
-		<nav class="head">
-			<div class="logo">
-				<a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
-				</a>
-			</div>
-
-			<ul class="menu">
-				<li><a href="/local-information-board" class="domestic">국내여행</a>
-					<ul class="innerdomsestic">
-						<li><a href="/Local/Information">여행지정보</a></li>
-						<li><a href="/Local/Gyotong">항공/교통</a></li>
-						<li><a href="/Local/Friends">일행구하기</a></li>
-						<li><a href="/Local/Review">여행후기</a></li>
-					</ul></li>
-				<li><a href="/world-information-board" class="overseas">해외여행</a>
-					<ul class="inneroverseas">
-						<li><a href="/World/Information">여행지정보</a></li>
-						<li><a href="/World-gyotong-board">항공/교통</a></li>
-						<li><a href="/World-friends-board">일행구하기</a></li>
-						<li><a href="/World-review-board">여행후기</a></li>
-					</ul></li>
-				<li><a href="/free-board" class="questionfree">커뮤니티</a>
-					<ul class="innerquestionfree">
-						<li><a href="/Community/FreeBoard">자유게시판</a></li>
-						<li><a href="/Community/QnaBoard">질문게시판</a></li>
-					</ul></li>
-				<li><a href="/notice-board" class="notice">공지사항</a>
-					<ul class="innernotice">
-						<li><a href="/notice-board">공지사항</a></li>
-						<li><a href="/support-board">고객지원</a></li>
-					</ul></li>
-			</ul>
-
-			<ul class="member">
-				<a href="/signup"><li>로그인</li></a>
-				<a href="/join"><li>회원가입</li></a>
-			</ul>
-
-			<!-- <ul class="info">
-				<li class="nickname"><a href="#">닉네임님</a></li>
-				<a href="#"><li class="logout">로그아웃</li></a>
-			</ul> -->
-		</nav>
-	</header>
-
-
+	<th:block th:insert="~{header :: header}">Header</th:block>
 	<section>
 		<div class="container">
 			<div class="idx_top">

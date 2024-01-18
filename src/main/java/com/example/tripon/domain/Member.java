@@ -54,4 +54,8 @@ public class Member implements UserDetails {
     public boolean isEnabled() {  //계정이 활성화(사용가능)인 지 리턴한다. (true: 활성화)
         return true;
     }
+
+    public String getNick() {
+        return nick;
+    }
 }
