@@ -6,17 +6,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/Main")
 @Controller
 public class MainController {
     private final MainBoardService mainBoardService;
-    @GetMapping("/board")
+    @GetMapping("/main")
     public String getAllPosts(@RequestParam(defaultValue = "1") int page, Model model) {
         int pageSize = 8; // 페이지당 게시글 수
         // 해당 페이지의 시작 인덱스 계산
