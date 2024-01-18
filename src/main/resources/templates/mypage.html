@@ -2,21 +2,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
+<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
+		th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
 	rel="stylesheet">
-<link rel="stylesheet" href="./css/mypage-Board.css" />
-<link rel="stylesheet" href="./css/nav.css" />
-<link rel="stylesheet" href="./css/style.css" />
-<link rel="stylesheet" href="./css/footer.css" />
+<link rel="stylesheet" th:href="@{/css/mypage-Board.css}" />
+<link rel="stylesheet" th:href="@{/css/nav.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/footer.css}" />
 
-<script src="https://kit.fontawesome.com/7aca531ae5.js"
+<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
 	crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/83aa94ddcc.js"
+<script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}"
 	crossorigin="anonymous"></script>
-<script src="./js/navbar.js" defer></script>
+<script th:src="@{/js/navbar.js}" defer></script>
 
 <title>커뮤니티</title>
 </head>
@@ -84,7 +84,7 @@
 								<div class="board_list">
 									<div class="top">
 										<div style="color: #D5D5D5" class="mypage">
-											<a href="mypage-checked.html">개인정보 변경</a>
+											<a th:href="@{mypage-checked}">개인정보 변경</a>
 										</div>
 										<div style="color: #D5D5D5" class="writing">
 											<a href="mypage-writing.html">작성글</a>

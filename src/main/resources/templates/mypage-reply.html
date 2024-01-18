@@ -2,21 +2,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
+<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
+		th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
 	rel="stylesheet">
-<link rel="stylesheet" href="./css/mypage-Board.css" />
-<link rel="stylesheet" href="./css/nav.css" />
-<link rel="stylesheet" href="./css/style.css" />
-<link rel="stylesheet" href="./css/footer.css" />
+<link rel="stylesheet" th:href="@{/css/mypage-Board.css}" />
+<link rel="stylesheet" th:href="@{/css/nav.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/footer.css}" />
 
-<script src="https://kit.fontawesome.com/7aca531ae5.js"
+<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
 	crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/83aa94ddcc.js"
+<script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}"
 	crossorigin="anonymous"></script>
-<script src="./js/navbar.js" defer></script>
+<script th:src="@{/js/navbar.js}" defer></script>
 
 <title>커뮤니티</title>
 </head>
@@ -58,7 +58,7 @@
 				</ul>
 
 				<ul class="member">
-					<a href="signin.html"><li>로그인</li></a>
+					<a href="/sign/signin"><li>로그인</li></a>
 					<a href="signup.html"><li>회원가입</li></a>
 				</ul>
 
@@ -90,19 +90,21 @@
 								<div class="board_list">
 									<div class="top">
 										<div style="color: #D5D5D5" class="mypage">
-											<a href="mypage-checked.html">개인정보 변경</a>
+											<a href="myinfomation">개인정보 변경</a>
 										</div>
 										<div style="color: #D5D5D5" class="writing">
-											<a href="mypage-writing.html">작성글</a>
+											<a href="myinfowrite">작성글</a>
 										</div>
 										<div class="reply">작성댓글</div>
 
 									</div>
-									<div>
-										<div class=write>그거 그렇게 하는거 아닌데...</div>
-										<div class="date">2023.05.30</div>
-									</div>
-									<div>
+									<th:block th:each="reply : ${myreply}">
+										<div>
+											<div class=write th:text="${reply.bcContent}"></div>
+											<div class="date" th:text="${#temporals.format(reply.bcUpdate, 'yyyy.MM.dd')}"></div>
+										</div>
+									</th:block>
+									<!--<div>
 										<div class="write">재미없어보이네요ㅋ</div>
 										<div class="date">2023.05.30</div>
 									</div>
@@ -120,15 +122,15 @@
 									<div>
 										<div class="write">뭐하세요?</div>
 										<div class="date">2023.05.30</div>
-									</div>
+									</div>-->
 								</div>
 								<div class="board-page-wrapper">
 									<div class="board_page">
-										<a href="#" class="bt first"><<</a> <a href="#"
-											class="bt prev"><</a> <a href="#" class="num on">1</a> <a
-											href="#" class="num">2</a> <a href="#" class="num">3</a> <a
-											href="#" class="num">4</a> <a href="#" class="num">5</a> <a
-											href="#" class="bt next">></a> <a href="#" class="bt last">>></a>
+										<a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite?page=1}" class="bt first">처음</a>
+										<a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite(page=${currentPage - 1})}" class="bt prev">이전</a>
+										<a th:each="pageNo: ${#numbers.sequence(1, totalPages)}" th:if="${currentPage >= 1}" th:href="@{/mypage/myinfowrite(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
+										<a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${currentPage + 1})}" class="bt next">다음</a>
+										<a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${totalPages})}" class="bt last">끝</a>
 									</div>
 								</div>
 

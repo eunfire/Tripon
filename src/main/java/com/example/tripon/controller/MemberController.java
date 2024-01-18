@@ -24,7 +24,7 @@ public class MemberController {
     public String signin(MemberDTO dto) {
         boolean isValidMember = memberService.isValidMember(dto.getMemId(), dto.getPw());
         if (isValidMember)
-            return "main";
+            return "Main/board";
         return "login";
     }
 
