@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/sign/signinProcess")	// [B] submit 받을 url
                         .usernameParameter("memId")	// [C] submit할 아이디
                         .passwordParameter("pw")	// [D] submit할 비밀번호
-                        .defaultSuccessUrl("/Main/board", true)
+                        .defaultSuccessUrl("/main", true)
                         .permitAll()
                 )
                 .logout(withDefaults()
