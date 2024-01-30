@@ -13,7 +13,7 @@
 <header>
   <nav class="head">
     <div class="logo">
-      <a href="/Main/board"> <img th:src="@{/img/logo-img2.png}"/>
+      <a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
       </a>
     </div>
 
@@ -46,11 +46,11 @@
 
     <ul sec:authorize="isAnonymous()" class="member">
       <a href="/sign/signin"><li>로그인</li></a>
-      <a href="/join"><li>회원가입</li></a>
+      <a href="/sign/signup"><li>회원가입</li></a>
     </ul>
 
     <ul sec:authorize="isAuthenticated()" class="info">
-        <li class="nickname"><a href="/mypage"><span th:text="${#authentication.name}">님</span></a></li>
+        <li class="nickname"><a href="/mypage"><span th:text="${#authentication.principal.nick}">님</span></a></li>
         <a href="/logout"><li class="logout">로그아웃</li></a>
     </ul>
   </nav>

@@ -1,5 +1,6 @@
 package com.example.tripon.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -64,6 +68,7 @@ public class SecurityConfig {
                         .usernameParameter("memId")	// [C] submit할 아이디
                         .passwordParameter("pw")	// [D] submit할 비밀번호
                         .defaultSuccessUrl("/main", true)
+                        .failureHandler(customAuthenticationFailureHandler) // 로그인 실패 시 처리할 핸들러 설정
                         .permitAll()
                 )
                 .logout(withDefaults()

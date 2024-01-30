@@ -1,5 +1,6 @@
 package com.example.tripon.repository;
 
+import com.example.tripon.domain.Member;
 import com.example.tripon.dto.BoardDTO;
 import com.example.tripon.dto.CommentDTO;
 import com.example.tripon.dto.MemberDTO;
@@ -19,6 +20,16 @@ public class MypageRepository {
     // 회원 정보 조회
     public MemberDTO getUser(String memId) {
         return sql.selectOne("mypage.getUser", memId);
+    }
+
+    //회원 정보 수정
+    public int infoUpdate(MemberDTO dto) {
+        return sql.update("mypage.infoUpdate", dto);
+    }
+
+    //비밀번호 변경
+    public int pwUpdate(Member member) {
+        return sql.update("mypage.pwUpdate", member);
     }
 
     // 작성한 게시글 목록 조회

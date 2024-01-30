@@ -12,6 +12,7 @@
 	
 </script>
 <script th:src="@{/js/Verification.js}"></script>
+	<script th:src="@{/js/Validity.js}"></script>
 <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
 <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
 <link
@@ -22,33 +23,28 @@
 	<div class="main-wrapper">
 		<div class="body">
 			<div class="logo">
-				<a href="main.html"><img src="img/logo-img2.png"></a>
+				<a href="/main"><img th:src="@{/img/logo-img2.png}"></a>
 			</div>
 
 			<div class="text">비밀번호 변경</div>
-			<div class="id">
-				현재 비밀번호<br> <input type="text" maxlength='11' id="username"
-					placeholder=" 현재 비밀번호">
-			</div>
-			<div class="pw">
-				변경할 비밀번호<br> <input type="text" maxlength='14' id="password"
-					placeholder=" 변경할 비밀번호">
-			</div>
-			<div class="miss-message hide" style="color: #FF0000">8~14자 이내의
-				영문, 숫자, 특수문자가 포함되어야 사용 가능합니다.</div>
-			<div class="success-password hide" style="color: #1DDB16">사용가능한
-				비밀번호입니다.</div>
-			<div class="checkpw">
-				변경할 비밀번호 확인<br> <input type="text" maxlength='14'
-					id="password-retype" placeholder=" 변경할 비밀번호 확인">
-			</div>
-			<div class="mismatch-message hide" style="color: #FF0000">비밀번호가
-				일치하지 않습니다.</div>
-			<div class="success-passwordRe hide" style="color: #1DDB16">비밀번호가
-				일치합니다.</div>
-			<div class="btn">
-				<input type="button" value=" 변경">
-			</div>
+			<form method="post" action="/mypage/pwchangeProcess">
+				<div class="id">
+					현재 비밀번호<br> <input type="password" name="pw" placeholder=" 현재 비밀번호">
+				</div>
+				<div class="pw">
+					변경할 비밀번호<br> <input type="password" name="changePw" placeholder=" 변경할 비밀번호">
+				</div>
+				<div class="miss-message hide" style="color: #FF0000">8~14자 이내의 영문, 숫자, 특수문자가 포함되어야 사용 가능합니다.</div>
+				<div class="success-password hide" style="color: #1DDB16">사용가능한 비밀번호입니다.</div>
+				<div class="checkpw">
+					변경할 비밀번호 확인<br> <input type="password" name="checkPw" placeholder=" 변경할 비밀번호 확인">
+				</div>
+				<div class="mismatch-message hide" style="color: #FF0000">비밀번호가 일치하지 않습니다.</div>
+				<div class="success-passwordRe hide" style="color: #1DDB16">비밀번호가 일치합니다.</div>
+				<div class="btn">
+					<button type="submit">변경</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -89,7 +85,5 @@
 			<p>Copyright © TRIPON Inc. All Rights Reserved.</p>
 		</div>
 	</footer>
-
-	<script src="./js/Validity.js"></script>
 </body>
 </html>

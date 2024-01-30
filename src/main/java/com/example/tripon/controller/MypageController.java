@@ -8,50 +8,103 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
     private final MypageService mypageService;
 
-    @GetMapping("/myinfo")
-    public String myInfo() {
-        return "mypage";
-    }
-
     @GetMapping("/mypage-checked")
     public String myPageChecked() {
         return "mypage-checked";
     }
 
-    @GetMapping("/myinfochange")
-    public String myInfoChange() {
-        return "mypage-information-change";
-    }
-
     // 회원 정보 조회
-    @GetMapping("/myinfomation")
+    @GetMapping("")
     public String myInfomation(Principal principal, Model model) {
+        // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
+
+        // 회원 정보 조회
         MemberDTO user = mypageService.getUser(memId);
         model.addAttribute("user", user);
+
         return "mypage-infomation";
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
-    //내가 작성한 게시글 목록 조회
+    // 회원 정보 수정
+    @GetMapping("/myinfoedit")
+    public String myInfoedit(Principal principal, Model model) {
+        // 로그인한 사용자 아이디 가져오기
+        String memId = principal.getName();
+
+        // 회원 정보 조회
+        MemberDTO user = mypageService.getUser(memId);
+        model.addAttribute("user", user);
+
+        return "mypage-information-change";
+    }
+
+    // 회원 정보 수정 프로세스
+    @PostMapping("/editProcess")
+    public String myInfoupdate(Principal principal, String name, String nick, String email) {
+        // 로그인한 사용자 아이디 가져오기
+        String memId = principal.getName();
+
+        // 회원 정보 수정
+        MemberDTO updto = new MemberDTO();
+        updto.setMemId(memId);
+        updto.setName(name);
+        updto.setNick(nick);
+        updto.setEmail(email);
+        mypageService.infoUpdate(updto);
+
+        return "redirect:/mypage";
+    }
+
+    // 비밀번호 변경
+    @GetMapping("/pwchange")
+    public String myPagepw() {
+        return "mypage-pw-change";
+    }
+
+    // 비밀번호 변경 프로세스
+    @PostMapping("/pwchangeProcess")
+    public String myPagepwChange(Principal principal, String pw, String changePw, String checkPw) {
+        // 로그인한 사용자 아이디 가져오기
+        String memId = principal.getName();
+
+        // 현재 비밀번호 확인
+        boolean isValidPw = mypageService.PwChecked(memId, pw);
+
+        // 조건 만족시 비밀번호 변경 실행
+        if(isValidPw) {
+            if(changePw.equals(checkPw)) {
+                mypageService.pwUpdate(memId, changePw);
+            } else {
+                return "mypage-pw-change";
+            }
+            return "redirect:/mypage";
+        } else {
+            return "mypage-pw-change";
+        }
+    }
+
+    // 내가 작성한 게시글 목록 조회
     @GetMapping("/myinfowrite")
     public String getMyList(Principal principal, Model model, @RequestParam(defaultValue="1") int page) {
+        // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
-        int pageSize = 10; // 페이지당 게시글 수
+
+        // 페이지당 게시글 수
+        int pageSize = 10;
 
         // 해당 페이지의 시작 인덱스 계산
         int startIndex = (page - 1) * pageSize;
@@ -66,11 +119,10 @@ public class MypageController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
-        logger.info("Pages: {}", page);
-        logger.info("TotalPages: {}", totalPages);
         return "mypage-writing";
     }
 
+    // 내가 작성한 댓글 목록 조회
     @GetMapping("/myinforeply")
     public String getMyReply(Principal principal, Model model, @RequestParam(defaultValue="1") int page) {
         // 로그인한 사용자 아이디 가져오기
@@ -95,7 +147,6 @@ public class MypageController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
-        logger.info("TotalPages: {}", page);
         return "mypage-reply";
     }
 }

@@ -21,10 +21,15 @@ public class MemberDetailsService implements UserDetailsService {
 
         String role = member.isRole() ? "ADMIN" : "USER";
 
-        return User.builder()
-                .username(username)
-                .password(member.getPw())
-                .roles(role)
-                .build();
+        // MemberDetails를 사용하여 UserDetails 객체 생성
+        Member memberDetails = new Member();
+        memberDetails.setMemId(username);
+        memberDetails.setPw(member.getPw());
+        memberDetails.setName(member.getName());
+        memberDetails.setNick(member.getNick());
+        memberDetails.setEmail(member.getEmail());
+        memberDetails.setRole(member.isRole());
+
+        return memberDetails;
     }
 }

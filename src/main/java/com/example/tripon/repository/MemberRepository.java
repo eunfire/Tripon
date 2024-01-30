@@ -1,16 +1,30 @@
 package com.example.tripon.repository;
 
 import com.example.tripon.domain.Member;
-import org.apache.ibatis.annotations.Mapper;
+import lombok.RequiredArgsConstructor;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-@Mapper
-public interface MemberRepository {
+@RequiredArgsConstructor
+public class MemberRepository {
+    private final SqlSessionTemplate sql;
 
-    Optional<Member> findByUserid(String memId);
-    void addMember(Member member);
+    public Optional<Member> findByUserid(String memId) {
+        Member member = sql.selectOne("member.findByUserid", memId);
+        return Optional.ofNullable(member);
+    }
+    public void addMember(Member member) {
+        sql.insert("member.addMember", member);
+    }
+
+    public String checkId(String memId) {
+        return sql.selectOne("member.checkId", memId);
+    }
+    public String checkNick(String nick) {
+        return sql.selectOne("member.checkNick", nick);
+    }
 
 }

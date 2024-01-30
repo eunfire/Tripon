@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.tripon.repository.MemberRepository">
+<mapper namespace="member">
     <select id="findByUserid" parameterType="String" resultType="member">
         SELECT * FROM member WHERE memId = #{memId}
     </select>
@@ -10,4 +10,11 @@
         INSERT INTO member (memId, pw, name, nick, email) value(#{memId}, #{pw}, #{name}, #{nick}, #{email})
     </insert>
 
+    <select id="checkId" parameterType="String" resultType="String">
+        SELECT memId FROM member WHERE memId = #{memId}
+    </select>
+
+    <select id="checkNick" parameterType="String" resultType="String">
+        SELECT nick FROM member WHERE nick = #{nick}
+    </select>
 </mapper>

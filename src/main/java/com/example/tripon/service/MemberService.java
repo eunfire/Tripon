@@ -15,31 +15,17 @@ public class MemberService {
     private final MemberRepository repo;
     private final PasswordEncoder passwordEncoder;
 
+    // memId에 해당하는 회원 정보 조회
     public Optional<Member> findOne(String memId) {  //Optional<Member>는 값이 null일 때 null로 표시하지 않고 비어있다 라는 객체를 생성하여 명시적으로 표현할 수 있음
         return repo.findByUserid(memId);
     }
 
+    // memId에 해당하는 비밀번호 입력시 암호화된 비밀번호와 매치되는지 확인 방법1 -> 방법2는 MypageService에 구현
     public boolean isValidMember(String memId, String pw) {
         Optional<Member> member = findOne(memId);
         /* member의 값이 있을때 .map()메소드 실행 - value이 value.getPw().equals(pw)의 조건에 맞으면 true 아니면 false
         member의 값이 없을때 .orElse()메소드 실행 - other은 값이 없을때 반환할 값을 나타냄 */
-        return member.map(value -> value.getPw().equals(pw)).orElse(false);
-    }
-
-    public boolean signin(String memId, String password) {
-        Optional<Member> memberOptional = findOne(memId);
-
-        if (memberOptional.isPresent()) {
-            Member member = memberOptional.get();
-            String storedPassword = member.getPw();
-
-            // 입력된 비밀번호를 해싱하여 저장된 비밀번호와 비교
-            boolean isPasswordMatch = passwordEncoder.matches(password, storedPassword);
-
-            return isPasswordMatch;
-        }
-
-        return false;
+        return member.map(value -> passwordEncoder.matches(pw, value.getPw())).orElse(false);
     }
 
     // 회원가입
@@ -57,5 +43,15 @@ public class MemberService {
 
         // 도메인 모델을 저장
         repo.addMember(member);
+    }
+
+    // 아이디 중복 확인
+    public String checkId(String memId) {
+        return repo.checkId(memId);
+    }
+
+    // 닉네임 중복 확인
+    public String checkNick(String nick) {
+        return repo.checkNick(nick);
     }
 }

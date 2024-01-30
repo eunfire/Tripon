@@ -1,5 +1,6 @@
 package com.example.tripon.domain;
 
+import com.example.tripon.dto.MemberDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
@@ -19,14 +20,16 @@ public class Member implements UserDetails {
     private String memId, pw, name, nick, email;
     private boolean role;
 
+    // 계정이 갖고있는 권한 목록을 리턴한다.
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { //계정이 갖고있는 권한 목록을 리턴한다.
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         String roles = role ? "ROLE_ADMIN" : "ROLE_USER";
         return List.of(new SimpleGrantedAuthority(roles ));
     }
 
+    // 계정의 비밀번호를 리턴한다.
     @Override
-    public String getPassword() { //계정의 비밀번호를 리턴한다.
+    public String getPassword() {
         return pw;
     }
 
@@ -53,9 +56,5 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {  //계정이 활성화(사용가능)인 지 리턴한다. (true: 활성화)
         return true;
-    }
-
-    public String getNick() {
-        return nick;
     }
 }
