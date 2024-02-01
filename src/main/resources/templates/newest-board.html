@@ -17,56 +17,18 @@
 	<script src="https://kit.fontawesome.com/83aa94ddcc.js"
 			crossorigin="anonymous"></script>
 	<script src="./js/navbar.js" defer></script>
+	<script>
+		function showLoginAlert() {
+			alert('로그인 후 게시글 등록이 가능합니다.');
+			window.location.href = '/sign/signin';
+		}
+	</script>
 	<title>최신글</title>
 </head>
 <body>
+<th:block th:insert="~{header :: header}">Header</th:block>
 <div
 		style="display: flex; flex-direction: column; min-height: 100vh; min-width: 1750px;">
-	<div class="containner_nav">
-		<nav class="head">
-			<div class="logo">
-				<a href="/Main/main"> <img src="/img/logo-img2.png" />
-				</a>
-			</div>
-
-			<ul class="menu">
-				<li><a href="/Local/Information" class="domestic">국내여행</a>
-					<ul class="innerdomsestic">
-						<li><a href="/Local/Information">여행지정보</a></li>
-						<li><a href="/Local/Gyotong">항공/교통</a></li>
-						<li><a href="/Local/Friends">일행구하기</a></li>
-						<li><a href="/Local/Review">여행후기</a></li>
-					</ul></li>
-				<li><a href="world-information-board.html" class="overseas">해외여행</a>
-					<ul class="inneroverseas">
-						<li><a href="world-information-board.html">여행지정보</a></li>
-						<li><a href="world-gyotong-board.html">항공/교통</a></li>
-						<li><a href="world-friends-board.html">일행구하기</a></li>
-						<li><a href="world-review-board.html">여행후기</a></li>
-					</ul></li>
-				<li><a href="free-board.html" class="questionfree">커뮤니티</a>
-					<ul class="innerquestionfree">
-						<li><a href="free-board.html">자유게시판</a></li>
-						<li><a href="qna-board.html">질문게시판</a></li>
-					</ul></li>
-				<li><a href="notice-board.html" class="notice">공지사항</a>
-					<ul class="innernotice">
-						<li><a href="notice-board.html">공지사항</a></li>
-						<li><a href="support-board.html">고객지원</a></li>
-					</ul></li>
-			</ul>
-
-			<ul class="member">
-				<a href="signup.html"><li>로그인</li></a>
-				<a href="join.html"><li>회원가입</li></a>
-			</ul>
-
-			<!-- <ul class="info">
-            <li class="nickname"><a href="#">닉네임님</a></li>
-            <a href="#"><li class="logout">로그아웃</li></a>
-        </ul> -->
-		</nav>
-	</div>
 	<!--! 사이드바 -->
 	<div style="flex: 1 1 0%">
 		<div style="margin-top: 25px; display: flex; justify-content: center">
@@ -98,7 +60,7 @@
 									<div>
 										<div class="num" th:text="${post.boardId}">1</div>
 										<div class="title">
-											<a th:text="${post.title}"></a>
+											<a th:href="@{/Local/post/{postId}(postId=${post.boardId})}" th:text="${post.title}"></a>
 										</div>
 										<div class="writer" th:text="${post.memId}"></div>
 										<div class="date" th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></div>
@@ -107,23 +69,24 @@
 								</th:block>
 							</div>
 							<div class="bt_wrap">
-								<a href="write-post.html" class="on">등록</a>
+								<a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/Local/write}" class="on">등록</a>
+								<a th:unless="${#authorization.expression('isAuthenticated()')}" href="#" onclick="showLoginAlert()">로그인 후 등록</a>
 							</div>
 							<!-- 페이징을 추가 -->
 							<div class="board-page-wrapper">
 								<div class="board_page">
-									<a th:href="@{/Main/newest?page=1}" class="bt first"><<</a>
+									<a th:href="@{/newest?page=1}" class="bt first"><<</a>
 									<!-- 이전 버튼 -->
-									<a th:if="${startPage > 1}" th:href="@{/Main/newest(page=${startPage - 1})}" class="bt prev">이전</a>
+									<a th:if="${startPage > 1}" th:href="@{/newest(page=${startPage - 1})}" class="bt prev">이전</a>
 
 									<!-- 페이지 번호 표시 -->
 									<th:block th:each="pageNo: ${#numbers.sequence(startPage, endPage)}">
-										<a th:href="@{/Main/newest(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
+										<a th:href="@{/newest(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
 									</th:block>
 
 									<!-- 다음 버튼 -->
-									<a th:if="${endPage < totalPages}" th:href="@{/Main/newest(page=${endPage + 1})}" class="bt next">다음</a>
-									<a th:if="${currentPage < totalPages}" th:href="@{/Main/newest(page=${totalPages})}" class="bt last">>></a>
+									<a th:if="${endPage < totalPages}" th:href="@{/newest(page=${endPage + 1})}" class="bt next">다음</a>
+									<a th:if="${currentPage < totalPages}" th:href="@{/newest(page=${totalPages})}" class="bt last">>></a>
 								</div>
 							</div>
 						</div>

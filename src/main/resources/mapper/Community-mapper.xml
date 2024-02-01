@@ -5,7 +5,8 @@
     <!-- cateId가 1이고 페이징된 게시글 목록 조회 -->
     <select id="getBoardsByCateIdWithPaging" parameterType="map" resultType="boardDTO">
         SELECT * FROM board WHERE cateId = #{cateId}
-            LIMIT #{startIndex}, #{pageSize};
+        ORDER BY boardId DESC
+        LIMIT #{startIndex}, #{pageSize};
     </select>
 
     <!-- cateId가 1인 게시글 목록 조회 -->
@@ -24,4 +25,42 @@
         SET views = views + 1
         WHERE boardId = #{postId};
     </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deletePostById" parameterType="int">
+        DELETE FROM board WHERE boardId = #{postId}
+    </delete>
+
+    <!-- 게시글 등록 -->
+    <insert id="addPost" parameterType="boardDTO">
+        INSERT INTO board (`memId`, `cateId`, `title`, `content`, `tStart`, `tEnd`)
+        VALUES (#{memId}, #{cateId}, #{title}, #{content}, #{tStart}, #{tEnd})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="editPost" parameterType="boardDTO">
+        UPDATE board
+        SET title = #{title}, tStart = #{tStart}, tEnd = #{tEnd}, content = #{content}
+        WHERE boardId = #{boardId};
+    </update>
+
+    <!-- 댓글 등록 -->
+    <insert id="addComment" parameterType="CommentDTO">
+        INSERT INTO boardComment (boardId, nick, bcContent) VALUES (#{boardId}, #{nick}, #{bcContent})
+    </insert>
+
+    <!-- 댓글 조회 -->
+    <select id="getCommentsByPostId" parameterType="int" resultType="CommentDTO">
+        SELECT * FROM boardComment WHERE boardId = #{postId}
+    </select>
+
+    <!-- 게시물별 좋아요 수 조회 -->
+    <select id="getLikeCountByBoardId" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM like_table WHERE boardId = #{boardId};
+    </select>
+
+    <!-- 좋아요 추가 -->
+    <insert id="addLike" parameterType="likeDTO">
+        INSERT INTO like_table (memId, boardId) VALUES (#{memId}, #{boardId});
+    </insert>
 </mapper>

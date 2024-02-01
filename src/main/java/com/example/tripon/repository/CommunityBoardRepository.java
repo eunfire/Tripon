@@ -1,6 +1,8 @@
 package com.example.tripon.repository;
 
 import com.example.tripon.dto.BoardDTO;
+import com.example.tripon.dto.CommentDTO;
+import com.example.tripon.dto.LikeDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -36,5 +38,38 @@ public class CommunityBoardRepository {
     // 게시글 조회수 증가
     public void increaseViews(int postId) {
         sql.update("free.increaseViews", postId);
+    }
+
+    // 게시글 삭제
+    public void deletePostById(int postId) {
+        sql.delete("free.deletePostById", postId);
+    }
+
+    // 글쓰기저장
+    public  void addPost(BoardDTO boardDTO) {
+        sql.insert("free.addPost", boardDTO);
+    }
+
+    // 게시글 수정
+    public void editPost(BoardDTO updatedPost) {
+        sql.update("free.editPost", updatedPost);
+    }
+
+    public List<CommentDTO> getCommentsByPostId(int postId) {
+        return sql.selectList("free.getCommentsByPostId", postId);
+    }
+
+    public void addComment(CommentDTO comment) {
+        sql.insert("free.addComment", comment);
+    }
+
+    // 좋아요 수 조회
+    public int getLikeCountByBoardId(int boardId) {
+        return sql.selectOne("free.getLikeCountByBoardId", boardId);
+    }
+
+    // 좋아요 추가
+    public void addLike(LikeDTO likeDTO) {
+        sql.insert("free.addLike", likeDTO);
     }
 }
