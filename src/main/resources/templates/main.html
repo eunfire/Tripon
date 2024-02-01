@@ -23,20 +23,17 @@
 		rel="stylesheet">
 </head>
 <body>
-	<th:block th:insert="~{header :: header}">Header</th:block>
+<th:block th:insert="~{header :: header}">Header</th:block>
 	<section>
 		<div class="container">
 			<div class="idx_top">
 				<div class="main_top_title">현실이 되는 꿈의 여행 트립온!</div>
 				<div class="main_top_sub">전세계 여행지에 대한 모든 정보를 나눠보세요.</div>
 				<div class="search-box">
-					<!-- 검색 폼 -->
-					<form th:action="@{/Main/search-all}" method="get">
-						<input type="text" name="search" placeholder="제목 검색">
-						<button type="submit">검색</button>
-					</form> <img class='search-btn2'
-						th:src="@{/img/search-btn2.png}">
-					</a>
+					<form th:action="@{/search-all}" method="get">
+						<input type="text" class="search-txt" name="search" /> <img
+							class="search-btn2" th:src="@{/img/search-btn2.png}"/>
+					</form>
 				</div>
 			</div>
 
@@ -45,7 +42,7 @@
 					<div class="idx_board">
 						<div class="title">
 							<a class="name">최신글</a> <a
-								href="/Main/newest" class="more"> <img th:src="@{/img/more.png}"
+								href="/newest" class="more"> <img th:src="@{/img/more.png}"
 								alt="더 보기"/>
 							</a>
 						</div>
@@ -53,10 +50,9 @@
 							<ul>
 								<!-- 숫자 이미지와 텍스트를 함께 표시하는 부분 -->
 								<li th:each="post, stat : ${posts}">
-									<a href="world-culture-board.html">
+									<a th:href="@{/Community/post/{postId}(postId=${post.boardId})}">
 										<!-- 숫자 이미지를 추가 -->
-										<img th:src="@{|/img/number/num${stat.index + 1}.png|}" />
-										<span th:text="${post.title}"></span>
+										<img th:src="@{|/img/number/num${stat.index + 1}.png|}" th:text="${post.title}" />
 									</a>
 									<span th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></span>
 								</li>
@@ -254,10 +250,10 @@
 			<div class="menu_line">
 				<ul class="menus">
 					<span>Menu</span>
-					<li><a href="notice-board.html">공지사항</a></li>
-					<li><a href="local-information-board.html">국내여행</a></li>
-					<li><a href="world-information-board.html">해외여행</a></li>
-					<li><a href="free-board.html">커뮤니티</a></li>
+					<li><a href="/notice-board">공지사항</a></li>
+					<li><a href="/Local/Information">국내여행</a></li>
+					<li><a href="/World/Information">해외여행</a></li>
+					<li><a href="/Community/FreeBoard">커뮤니티</a></li>
 				</ul>
 			</div>
 

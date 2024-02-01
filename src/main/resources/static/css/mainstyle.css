@@ -102,7 +102,7 @@ li {
 }
 .search-txt {
   display: flex;
-  width: 0px;
+  width: 350px;
   border: none;
   background: none;
   outline: none;
@@ -208,6 +208,9 @@ li {
   width: 80%;
   font-size: 16px;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .idx_board .list span {

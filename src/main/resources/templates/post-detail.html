@@ -16,53 +16,9 @@
 </head>
 
 <body>
+<th:block th:insert="~{header :: header}">Header</th:block>
 	<div
 		style="display: flex; flex-direction: column; min-height: 100vh; min-width: 1750px;">
-		<div class="containner_nav">
-			<nav class="head">
-				<div class="logo">
-					<a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
-					</a>
-				</div>
-
-				<ul class="menu">
-					<li><a href="local-information-board.html" class="domestic">국내여행</a>
-						<ul class="innerdomsestic">
-							<li><a href="local-information-board.html">여행지정보</a></li>
-							<li><a href="local-gyotong-board.html">항공/교통</a></li>
-							<li><a href="local-friends-board.html">일행구하기</a></li>
-							<li><a href="local-review-board.html">여행후기</a></li>
-						</ul></li>
-					<li><a href="world-information-board.html" class="overseas">해외여행</a>
-						<ul class="inneroverseas">
-							<li><a href="world-information-board.html">여행지정보</a></li>
-							<li><a href="world-gyotong-board.html">항공/교통</a></li>
-							<li><a href="world-friends-board.html">일행구하기</a></li>
-							<li><a href="world-review-board.html">여행후기</a></li>
-						</ul></li>
-					<li><a href="free-board.html" class="questionfree">커뮤니티</a>
-						<ul class="innerquestionfree">
-							<li><a href="free-board.html">자유게시판</a></li>
-							<li><a href="qna-board.html">질문게시판</a></li>
-						</ul></li>
-					<li><a href="notice-board.html" class="notice">공지사항</a>
-						<ul class="innernotice">
-							<li><a href="notice-board.html">공지사항</a></li>
-							<li><a href="support-board.html">고객지원</a></li>
-						</ul></li>
-				</ul>
-
-				<ul class="member">
-					<a href="signin.html"><li>로그인</li></a>
-					<a href="signup.html"><li>회원가입</li></a>
-				</ul>
-
-				<!-- <ul class="info">
-				<li class="nickname"><a href="#">닉네임님</a></li>
-				<a href="#"><li class="logout">로그아웃</li></a>
-			</ul> -->
-			</nav>
-		</div>
 		<!--! 사이드바 -->
 		<div style="flex: 1 1 0%">
 			<div style="margin-top: 25px; display: flex; justify-content: center">
@@ -88,7 +44,11 @@
 											<div class="info2_left">
 												<dl>
 													<dt>여행 기간</dt>
-													<dd>2023-05-10 ~ 2023-05-12</dd>
+													<dd th:text="${post.tStart} + ' ~ ' + ${post.tEnd}"></dd>
+												</dl>
+												<dl>
+													<dt>모집 인원</dt>
+													<dd>3명</dd>
 												</dl>
 											</div>
 
@@ -113,9 +73,13 @@
 								</div>
 								<div class="post-actions">
 									<button class="editButton" id="editButton">
-										<a href="edit-post.html">수정</a>
+										<a th:href="@{'/Community/post/' + ${post.boardId} + '/edit'}">수정</a>
 									</button>
-									<button class="deleteButton" id="deleteButton">삭제</button>
+
+									<!-- 게시글 삭제 -->
+									<form id="deleteForm" th:action="@{/Community/post/{postId}/delete(postId=${post.boardId})}" method="post">
+										<button class="deleteButton" id="deleteButton" type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">삭제</button>
+									</form>
 									<button class="goBackButton" id="goBackButton">목록</button>
 								</div>
 							</main>
@@ -129,44 +93,34 @@
 								</div>
 							</div>
 
-							<ul class="fdb_lst_ul">
-								<li id="first_cmt" class="first_cmt">
-									<div class="cmt_line" id="cmt_line">
-										<span class="cmt_nick">닉네임</span> <span class="cmt_date">2023-05-10
-											05:41:33</span>
-									</div>
-									<div class="first_cmt_na">댓글이 생성되었습니다.</div>
+							<!-- 댓글 목록을 보여주는 부분 -->
+							<ul th:each="comment : ${comments}">
+								<li>
+									<span th:text="${comment.nick}"></span>
+									<span th:text="${comment.bcDate}"></span>
+									<p th:text="${comment.bcContent}"></p>
 								</li>
 							</ul>
 
-							<ul class="fdb_lst_ul">
-								<li id="first_cmt" class="first_cmt">
-									<div class="cmt_line" id="cmt_line">
-										<span class="cmt_nick">가입자</span> <span class="cmt_date">2023-05-10
-											06:21:10</span>
-									</div>
-									<div class="first_cmt_na">두번째 댓글이 생성되었습니다.</div>
-								</li>
-							</ul>
-
-							<!-- 댓글리스트 -->
-							<ul id="comment-list"></ul>
-
-							<div class="cmt_write_input">
-								<textarea class="cmt_textarea" id="comment-input"
-									placeholder="이 곳에 댓글내용을 입력해주세요."
-									style="width: 100%; height: 106px"></textarea>
-							</div>
-
-							<div class="post-actions">
-								<button type="submit" id="submitButton">등록</button>
-							</div>
+							<!-- 댓글 입력 폼 -->
+							<form th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
+								<textarea name="bcContent" placeholder="댓글을 입력해주세요."></textarea>
+								<button type="submit">댓글 작성</button>
+							</form>
 						</div>
 					</div>
 				</section>
 			</div>
 		</div>
-
+		<div class="like-section">
+			<p>좋아요 수: <span th:text="${likeCount}"></span></p>
+			<form th:action="@{/Community/post/{postId}/like(postId=${post.boardId})}" method="post">
+				<!-- 아래의 hidden input을 추가하여 boardId를 전달 -->
+				<input type="hidden" name="boardId" th:value="${post.boardId}" />
+				<input type="hidden" name="memId" th:value="${#authentication.name}">
+				<button type="submit">좋아요</button>
+			</form>
+		</div>
 		<footer>
 			<div class="container_footer">
 				<div class="logo_line">
@@ -205,87 +159,5 @@
 			</div>
 		</footer>
 	</div>
-
-	<script>
-      //목록 이동 이벤트
-      document
-        .getElementById('goBackButton')
-        .addEventListener('click', function () {
-          window.location.href = '/boards.html'; // 목록으로 이동하는 페이지 주소를 입력합니다.
-        });
-
-      // 수정 버튼 이벤트
-      document
-        .getElementById('editButton')
-        .addEventListener('click', function () {
-          window.location.href = 'edit-post.html';
-        });
-
-      // 삭제 버튼 이벤트
-      document
-        .getElementById('deleteButton')
-        .addEventListener('click', function () {
-          if (confirm('정말로 삭제하시겠습니까?')) {
-            // 삭제 코드 입력
-            alert('삭제되었습니다.');
-          } else {
-            // 취소할 때의 코드 입력
-            alert('삭제가 취소되었습니다.');
-          }
-        });
-      //댓글 등록 이벤트
-      const commentInput = document.querySelector('#comment-input');
-      const commentList = document.querySelector('#comment-list');
-      const submitButton = document.querySelector('#submitButton');
-
-      submitButton.addEventListener('click', (e) => {
-        console.log(e);
-        e.preventDefault(); // 폼 기본 동작 방지
-
-        // 댓글 작성 시간
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const time = `${now.getFullYear()}-${
-          now.getMonth() + 1
-        }-${now.getDate()} ${hours}:${minutes}:${seconds}`;
-
-        // 새로운 댓글 생성
-        const newComment = document.createElement('li');
-        newComment.setAttribute('class', 'fdb_lst_ul');
-
-        const cmtLineDiv = document.createElement('div');
-        cmtLineDiv.setAttribute('class', 'cmt_line');
-
-        const commentAuthorSpan = document.createElement('span');
-        commentAuthorSpan.setAttribute('class', 'cmt_nick');
-        const commentAuthor = document.createTextNode('작성자'); // 작성자 이름
-        commentAuthorSpan.appendChild(commentAuthor);
-
-        const commentTimeSpan = document.createElement('span');
-        commentTimeSpan.setAttribute('class', 'cmt_date');
-        const commentTime = document.createTextNode(time); // 작성 시간
-        commentTimeSpan.appendChild(commentTime);
-
-        cmtLineDiv.appendChild(commentAuthorSpan);
-        cmtLineDiv.appendChild(commentTimeSpan);
-
-        const commentTextDiv = document.createElement('div');
-        commentTextDiv.setAttribute('class', 'first_cmt_na');
-        commentTextDiv.setAttribute('style', 'white-space: pre-wrap;');
-        const commentText = document.createTextNode(commentInput.value); // 댓글 내용
-        commentTextDiv.appendChild(commentText);
-
-        newComment.appendChild(cmtLineDiv);
-        newComment.appendChild(commentTextDiv);
-
-        // 새로운 댓글을 댓글 리스트의 마지막 자식으로 추가
-        commentList.appendChild(newComment);
-
-        // 댓글 입력 필드 초기화
-        commentInput.value = '';
-      });
-    </script>
 </body>
 </html>

@@ -74,8 +74,8 @@
 					<div class="main-wrapper">
 						<div class="board_wrap">
 							<div class="board-title-searchbar-wrapper">
-								<div class="board_title">
-									<strong>"검색어"과(와) 일치하는 모든 검색 결과</strong>
+								<div class="board_title" th:if="${param.search != null}">
+									<strong th:text="'&ldquo;' + ${param.search} + '&rdquo;과(와) 일치하는 모든 검색 결과'" th:remove="tag"></strong>
 								</div>
 
 								<div class="search-box">
@@ -107,6 +107,7 @@
 										</div>
 									</th:block>
 								</div>
+
 								<div class="board-page-wrapper">
 									<div class="board_page">
 										<a href="#" class="bt first"><<</a> <a href="#"

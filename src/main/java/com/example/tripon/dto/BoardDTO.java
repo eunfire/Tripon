@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Alias("boardDTO")
@@ -14,12 +15,11 @@ public class BoardDTO {
     private String memId;
     private int cateId;
     private String title;
-    private LocalDateTime tStart;
-    private LocalDateTime tEnd;
+    private LocalDate tStart;
+    private LocalDate tEnd;
     private int tMember;
     private String content;
     private LocalDateTime createdTime;
     private int views;
     private LocalDateTime editTime;
 }
-

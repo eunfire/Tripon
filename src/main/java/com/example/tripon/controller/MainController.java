@@ -92,4 +92,9 @@ public class MainController {
 
         return "/newest-board";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "/test";
+    }
 }

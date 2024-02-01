@@ -12,61 +12,24 @@
 	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 
-	<script src="https://kit.fontawesome.com/7aca531ae5.js"
+	<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
+			crossorigin="anonymous">
+	</script>
+	<script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}"
 			crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/83aa94ddcc.js"
-			crossorigin="anonymous"></script>
-	<script src="./js/navbar.js" defer></script>
+	<script th:src="@{/js/navbar.js}" defer></script>
+	<script>
+		function showLoginAlert() {
+			alert('로그인 후 게시글 등록이 가능합니다.');
+			window.location.href = '/sign/signin';
+		}
+	</script>
 	<title>커뮤니티</title>
 </head>
 <body>
+<th:block th:insert="~{header :: header}">Header</th:block>
 <div
 		style="display: flex; flex-direction: column; min-height: 100vh; min-width: 1750px;">
-	<div class="containner_nav">
-		<nav class="head">
-			<div class="logo">
-				<a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
-				</a>
-			</div>
-
-			<ul class="menu">
-				<li><a href="local-information-board.html" class="domestic">국내여행</a>
-					<ul class="innerdomsestic">
-						<li><a href="local-information-board.html">여행지정보</a></li>
-						<li><a href="local-gyotong-board.html">항공/교통</a></li>
-						<li><a href="local-friends-board.html">일행구하기</a></li>
-						<li><a href="local-review-board.html">여행후기</a></li>
-					</ul></li>
-				<li><a href="world-information-board.html" class="overseas">해외여행</a>
-					<ul class="inneroverseas">
-						<li><a href="world-information-board.html">여행지정보</a></li>
-						<li><a href="world-gyotong-board.html">항공/교통</a></li>
-						<li><a href="world-friends-board.html">일행구하기</a></li>
-						<li><a href="world-review-board.html">여행후기</a></li>
-					</ul></li>
-				<li><a href="free-board.html" class="questionfree">커뮤니티</a>
-					<ul class="innerquestionfree">
-						<li><a href="free-board.html">자유게시판</a></li>
-						<li><a href="qna-board.html">질문게시판</a></li>
-					</ul></li>
-				<li><a href="notice-board.html" class="notice">공지사항</a>
-					<ul class="innernotice">
-						<li><a href="notice-board.html">공지사항</a></li>
-						<li><a href="support-board.html">고객지원</a></li>
-					</ul></li>
-			</ul>
-
-			<ul class="member">
-				<a href="signup.html"><li>로그인</li></a>
-				<a href="signup.html"><li>회원가입</li></a>
-			</ul>
-
-			<!-- <ul class="info">
-            <li class="nickname"><a href="#">닉네임님</a></li>
-            <a href="#"><li class="logout">로그아웃</li></a>
-        </ul> -->
-		</nav>
-	</div>
 	<!--! 사이드바 -->
 	<div style="flex: 1 1 0%">
 		<div style="margin-top: 25px; display: flex; justify-content: center">
@@ -110,7 +73,8 @@
 								</th:block>
 							</div>
 							<div class="bt_wrap">
-								<a th:href="@{/Community/writer}" class="on">등록</a>
+								<a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/Local/write}" class="on">등록</a>
+								<a th:unless="${#authorization.expression('isAuthenticated()')}" href="#" onclick="showLoginAlert()">로그인 후 등록</a>
 							</div>
 							<!-- 페이징을 추가 -->
 							<div class="board-page-wrapper">
