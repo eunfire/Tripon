@@ -18,20 +18,13 @@ $(document).ready(function () {
         return check.memId && check.pw && check.checkPw && check.nick;
     }
 
-    // 폼 제출 활성화 여부 업데이트하여 validateForm()값이 true되면 폼 제출 활성화
-    function updateSubmitButton() {
-        if (validateForm()) {
-            $("#formSignup").submit();
-        }
-    }
-
     // 아이디 유효성 검사
     function validateMemId() {
         if (!idRegex.test(memId.val())) {
+            check.memId = false;
             $("#faId").show();
             $("#duId").hide();
             $("#suId").hide();
-            check.memId = false;
         } else {
             $.ajax({
                 url: "/sign/checkid",
@@ -39,17 +32,16 @@ $(document).ready(function () {
                 data: {"memId": memId.val()},
                 success: function (data) {
                     if (data === 1) {
+                        check.memId = false;
                         $("#faId").hide();
                         $("#duId").show();
                         $("#suId").hide();
-                        check.memId = false;
                     } else {
+                        check.memId = true;
                         $("#faId").hide();
                         $("#duId").hide();
                         $("#suId").show();
-                        check.memId = true;
                     }
-                    updateSubmitButton();
                 }
             });
         }
@@ -58,38 +50,36 @@ $(document).ready(function () {
     // 비밀번호 유효성 검사
     function validatePw() {
         if (!pwRegex.test(pw.val())) {
+            check.pw = false;
             $("#faPw").show();
             $("#suPw").hide();
-            check.pw = false;
         } else {
+            check.pw = true;
             $("#faPw").hide();
             $("#suPw").show();
-            check.pw = true;
         }
-        updateSubmitButton();
     }
 
     // 비밀번호 일치 확인
     function validateCheckPw() {
         if (pw.val() !== checkPw.val()) {
+            check.checkPw = false;
             $("#faPwCheck").show();
             $("#suPwCheck").hide();
-            check.checkPw = false;
         } else {
+            check.checkPw = true;
             $("#faPwCheck").hide();
             $("#suPwCheck").show();
-            check.checkPw = true;
         }
-        updateSubmitButton();
     }
 
     // 닉네임 유효성 검사
     function validateNick() {
         if (!nickRegex.test(nick.val())) {
+            check.nick = false;
             $("#faNick").show();
             $("#duNick").hide();
             $("#suNick").hide();
-            check.nick = false;
         } else {
             $.ajax({
                 url: "/sign/checknick",
@@ -97,17 +87,16 @@ $(document).ready(function () {
                 data: {"nick": nick.val()},
                 success: function (data) {
                     if (data === 1) {
+                        check.nick = false;
                         $("#faNick").hide();
                         $("#duNick").show();
                         $("#suNick").hide();
-                        check.nick = false;
                     } else {
+                        check.nick = true;
                         $("#faNick").hide();
                         $("#duNick").hide();
                         $("#suNick").show();
-                        check.nick = true;
                     }
-                    updateSubmitButton();
                 }
             });
         }

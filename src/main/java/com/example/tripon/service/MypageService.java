@@ -32,7 +32,7 @@ public class MypageService {
 
     // 비밀번호 확인
     // memId에 해당하는 비밀번호 입력시 암호화된 비밀번호와 매치되는지 확인 방법2 -> 방법1은 MemberService 구현
-    public boolean PwChecked(String memId, String pw) {
+    public boolean pwChecked(String memId, String pw) {
         Optional<Member> memberOptional = memberService.findOne(memId);
 
         if (memberOptional.isPresent()) {

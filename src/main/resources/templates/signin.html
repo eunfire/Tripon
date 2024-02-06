@@ -24,10 +24,10 @@
 
 			<form id="formSignin" method="post" action="/sign/signinProcess">
 				<div class="id">
-					아이디<br> <input type="text" name="memId" id="memId" placeholder="ID">
+					아이디<br> <input type="text" name="memId" id="memId" placeholder=" ID">
 				</div>
 				<div class="pw">
-					비밀번호<br> <input type="password" name="pw" id="pw" placeholder="비밀번호">
+					비밀번호<br> <input type="password" name="pw" id="pw" placeholder=" 비밀번호">
 				</div>
 				<div id="errorMessage" th:if="${param.error}">
 					<p th:utext="${session.errorMessage}"></p>

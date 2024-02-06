@@ -5,6 +5,7 @@ import com.example.tripon.dto.CommentDTO;
 import com.example.tripon.dto.MemberDTO;
 import com.example.tripon.service.MypageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,6 @@ import java.util.List;
 public class MypageController {
     private final MypageService mypageService;
 
-    @GetMapping("/mypage-checked")
-    public String myPageChecked() {
-        return "mypage-checked";
-    }
-
     // 회원 정보 조회
     @GetMapping("")
     public String myInfomation(Principal principal, Model model) {
@@ -37,6 +33,25 @@ public class MypageController {
         model.addAttribute("user", user);
 
         return "mypage-infomation";
+    }
+
+    // 비밀번호 확인
+    @GetMapping("/checkpw")
+    public String checkPw() {
+        return "mypage-checked";
+    }
+
+    // 비밀번호 확인 프로세스
+    @PostMapping("/checkpwprocess")
+    public ResponseEntity<String> checkPwProcess(Principal principal, String pw){
+        // 로그인한 사용자 아이디 가져오기
+        String memId = principal.getName();
+        // 현재 비밀번호 확인
+        boolean isValidPw = mypageService.pwChecked(memId, pw);
+
+        if(isValidPw) {
+            return ResponseEntity.ok("success");
+        }return ResponseEntity.ok("fail");
     }
 
     // 회원 정보 수정
@@ -77,23 +92,23 @@ public class MypageController {
 
     // 비밀번호 변경 프로세스
     @PostMapping("/pwchangeProcess")
-    public String myPagepwChange(Principal principal, String pw, String changePw, String checkPw) {
+    public ResponseEntity<String> myPagepwChange(Principal principal, String pw, String changePw, String checkPw) {
         // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
 
         // 현재 비밀번호 확인
-        boolean isValidPw = mypageService.PwChecked(memId, pw);
+        boolean isValidPw = mypageService.pwChecked(memId, pw);
 
         // 조건 만족시 비밀번호 변경 실행
-        if(isValidPw) {
-            if(changePw.equals(checkPw)) {
+        if (isValidPw) {
+            if (changePw.equals(checkPw)) {
                 mypageService.pwUpdate(memId, changePw);
+                return ResponseEntity.ok("success"); // 비밀번호 변경 성공
             } else {
-                return "mypage-pw-change";
+                return ResponseEntity.ok("pwMismatch"); // 새로운 비밀번호와 비밀번호 확인이 일치하지 않음
             }
-            return "redirect:/mypage";
         } else {
-            return "mypage-pw-change";
+            return ResponseEntity.ok("invalidPw"); // 현재 비밀번호가 다름
         }
     }
 

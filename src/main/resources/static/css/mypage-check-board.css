@@ -86,7 +86,14 @@ a {
   font-weight: 600;
 }
 
-.myinfo {
+.checkpw {
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  margin: 50px auto;/*위 우 아래 좌*/
+}
+
+.myinfo, .myinfoedit {
   width: 500px;
   font-size: 15px;
   margin: 50px auto;/*위 우 아래 좌*/
@@ -150,11 +157,11 @@ a {
 }
 
 .id>p {
-  flex : 3;
+  flex : 2;
 }
 
 .id input {
-  border: 1px solid #828282;
+  border: 3px solid #828282;
   border-radius: 8px;
   height: 40px;
   padding: 5px 10px;
@@ -162,41 +169,47 @@ a {
   font-size: 20px;
 }
 
+.btn {
+  display : flex;
+  justify-content: space-around;
+  margin: 40px auto;
+}
 
-/*.id{
-    font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232;
-    
-}
-.id input{
-    width : 430px;
-    height: 60px;
-    border-radius: 10px;
-    font-size: 20px;
-    color: #000000;
-    border: 3px solid #828282;
-    margin: 0 0 0 385px;
-}
-.btn input{
-    margin-top: 20px;
-    width : 430px;
-    height: 60px;
-    border-radius: 10px;
-    background-color: #0020ff;
-    color : #FAEBCD;
-    font-size: 20px;
-    font-weight: bolder;  
-    margin: 0 0 0 385px;
-}
-.btn button{
-  margin-top: 20px;
-  width : 430px;
-  height: 60px;
-  border-radius: 10px;
+.btn button {
   background-color: #0020ff;
-  color : #FAEBCD;
-  font-size: 20px;
+  border: 1px solid #0020ff;
+  border-radius: 8px;
+  color: #FAEBCD;
+  padding: 10px 35px;
+  width: 500px;
+  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.1);
   font-weight: bolder;
-  margin: 0 0 0 385px;
-}*/
+  font-size: 19px;
+}
+
+.btn button:hover {
+  background-color: #c1c5ff;
+  border: 1px solid #c1c5ff;
+  color: #444444;
+  font-weight: bolder;
+  font-size: 19px;
+}
+
+input[disabled] {
+  background-color: #eee;
+}
+
+.failure-message, .duplicate-message, .success-message {
+  display: none;
+  text-align: center;
+}
+
+.failure-message, .duplicate-message {
+  font-size : 14px;
+  color: #FF0000;
+}
+
+.success-message {
+  font-size : 14px;
+  color: #0020ff;
+}

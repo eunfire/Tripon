@@ -16,6 +16,7 @@ public class MemberRepository {
         Member member = sql.selectOne("member.findByUserid", memId);
         return Optional.ofNullable(member);
     }
+
     public void addMember(Member member) {
         sql.insert("member.addMember", member);
     }
@@ -23,6 +24,7 @@ public class MemberRepository {
     public String checkId(String memId) {
         return sql.selectOne("member.checkId", memId);
     }
+
     public String checkNick(String nick) {
         return sql.selectOne("member.checkNick", nick);
     }

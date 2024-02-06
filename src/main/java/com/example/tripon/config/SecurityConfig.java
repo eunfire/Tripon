@@ -44,7 +44,7 @@ public class SecurityConfig {
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/post/write", "GET"),
                             new AntPathRequestMatcher("/post", "POST"),
-                            new AntPathRequestMatcher("/mypage", "GET"),
+                            new AntPathRequestMatcher("/mypage/**", "GET"),
                             new AntPathRequestMatcher("/adminpost", "GET"),
                             new AntPathRequestMatcher("/admin/deletePost/**", "GET"),
                             new AntPathRequestMatcher("/post/modify/**", "GET"),

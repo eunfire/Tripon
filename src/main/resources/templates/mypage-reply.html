@@ -1,156 +1,158 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
-<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
-<link
-		th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
-	rel="stylesheet">
-<link rel="stylesheet" th:href="@{/css/mypage-Board.css}" />
-<link rel="stylesheet" th:href="@{/css/nav.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-<link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <meta charset="UTF-8"/>
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}"/>
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin/>
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
+            rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/mypage-Board.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
 
-<script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
-	crossorigin="anonymous"></script>
-<script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}"
-	crossorigin="anonymous"></script>
-<script th:src="@{/js/navbar.js}" defer></script>
+    <script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}"
+            crossorigin="anonymous"></script>
+    <script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/js/navbar.js}" defer></script>
 
-<title>커뮤니티</title>
+    <title>커뮤니티</title>
 </head>
 <body>
-	<div
-		style="display: flex; flex-direction: column; min-height: 100vh; min-width: 1750px;">
-		<th:block th:insert="~{header :: header}">Header</th:block>
-		<!--! 사이드바 -->
-		<div style="flex: 1 1 0%">
-			<div style="margin-top: 25px; display: flex; justify-content: center">
-				<section style="position: relative">
-					<div class="main-wrapper">
-						<div class="board_wrap">
-							<div class="board-title-searchbar-wrapper">
-								<div class="board_title">
-									<strong>작성 댓글</strong>
-								</div>
-								<div class="search-box">
-									<input type="text" class="search-txt" name=""
-										placeholder="찾고 싶은 작성댓글을 입력하세요"> <a class="search-btn"
-										href="#"> <img class='search-btn2'
-										src="img/search-btn2.png">
-									</a>
-								</div>
-							</div>
-							<div class="board_list_wrap">
-								<div class="board_list">
-									<div class="top">
-										<div style="color: #D5D5D5" class="mypage">
-											<a href="/mypage">회원 정보</a>
-										</div>
-										<div style="color: #D5D5D5" class="writing">
-											<a href="/mypage/myinfowrite">작성글</a>
-										</div>
-										<div class="reply">
-											<a href="/mypage/myinforeply">작성댓글</a>
-										</div>
+<div
+        style="display: flex; flex-direction: column; min-height: 100vh; min-width: 1750px;">
+    <th:block th:insert="~{header :: header}">Header</th:block>
+    <!--! 사이드바 -->
+    <div style="flex: 1 1 0%">
+        <div style="margin-top: 25px; display: flex; justify-content: center">
+            <section style="position: relative">
+                <div class="main-wrapper">
+                    <div class="board_wrap">
+                        <div class="board-title-searchbar-wrapper">
+                            <div class="board_title">
+                                <strong>작성 댓글</strong>
+                            </div>
+                            <div class="search-box">
+                                <input type="text" class="search-txt" name=""
+                                       placeholder="찾고 싶은 작성댓글을 입력하세요"> <a class="search-btn"
+                                                                           href="#"> <img class='search-btn2'
+                                                                                          src="img/search-btn2.png">
+                            </a>
+                            </div>
+                        </div>
+                        <div class="board_list_wrap">
+                            <div class="board_list">
+                                <div class="top">
+                                    <div style="color: #D5D5D5" class="mypage">
+                                        <a href="/mypage">회원 정보</a>
+                                    </div>
+                                    <div style="color: #D5D5D5" class="writing">
+                                        <a href="/mypage/myinfowrite">작성글</a>
+                                    </div>
+                                    <div class="reply">
+                                        <a href="/mypage/myinforeply">작성댓글</a>
+                                    </div>
 
-									</div>
-									<th:block th:each="reply : ${myreply}">
-										<div>
-											<div class=write th:text="${reply.bcContent}"></div>
-											<div class="date" th:text="${#temporals.format(reply.bcUpdate, 'yyyy.MM.dd')}"></div>
-										</div>
-									</th:block>
-									<!--<div>
-										<div class="write">재미없어보이네요ㅋ</div>
-										<div class="date">2023.05.30</div>
-									</div>
-									<div>
-										<div class="write">정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
-											재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!</div>
-										<div class="date">2023.05.30</div>
-									</div>
-									<div>
-										<div class="write">뭐하세요?</div>
-										<div class="date">2023.05.30</div>
-									</div>-->
-								</div>
-								<div class="board-page-wrapper">
-									<div class="board_page">
-										<a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite?page=1}" class="bt first">처음</a>
-										<a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite(page=${currentPage - 1})}" class="bt prev">이전</a>
-										<a th:each="pageNo: ${#numbers.sequence(1, totalPages)}" th:if="${currentPage >= 1}" th:href="@{/mypage/myinfowrite(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
-										<a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${currentPage + 1})}" class="bt next">다음</a>
-										<a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${totalPages})}" class="bt last">끝</a>
-									</div>
-								</div>
+                                </div>
+                                <th:block th:each="reply : ${myreply}">
+                                    <div>
+                                        <div class=write th:text="${reply.bcContent}"></div>
+                                        <div class="date"
+                                             th:text="${#temporals.format(reply.bcUpdate, 'yyyy.MM.dd')}"></div>
+                                    </div>
+                                </th:block>
+                                <!--<div>
+                                    <div class="write">재미없어보이네요ㅋ</div>
+                                    <div class="date">2023.05.30</div>
+                                </div>
+                                <div>
+                                    <div class="write">정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말
+                                        재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!정말 재밌어보여요!</div>
+                                    <div class="date">2023.05.30</div>
+                                </div>
+                                <div>
+                                    <div class="write">뭐하세요?</div>
+                                    <div class="date">2023.05.30</div>
+                                </div>-->
+                            </div>
+                            <div class="board-page-wrapper" th:if="${totalPages > 0}">
+                                <div class="board_page">
+                                    <a th:href="@{/mypage/myinforeply?page=1}" class="bt first"><<</a>
+                                    <a th:if="${currentPage > 1}" th:href="@{/mypage/myinforeply(page=${currentPage - 1})}" class="bt prev">이전</a>
+                                    <th:block th:each="pageNo: ${#numbers.sequence(1, totalPages)}">
+                                        <a th:href="@{/mypage/myinforeply(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
+                                    </th:block>
+                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinforeply(page=${currentPage + 1})}" class="bt next">다음</a>
+                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinforeply(page=${totalPages})}" class="bt last">>></a>
+                                </div>
+                            </div>
 
 
+                        </div>
+                        <aside id="sub-menu"
+                               style="position: absolute; top: 295px; left: -180px; margin: 0">
+                            <h3>회원 정보</h3>
+                            <h4>
+                                <a href="/mypage/checkpw">회원 정보 변경</a>
+                            </h4>
+                            <h4>
+                                <a href="/mypage/pwchange">비밀번호 변경</a>
+                            </h4>
+                            <h4>
+                                <a href="mypage-leave.html">회원 탈퇴</a>
+                            </h4>
 
-							</div>
-							<aside id="sub-menu"
-								style="position: absolute; top: 295px; left: -180px; margin: 0">
-								<h3>회원 정보</h3>
-								<h4>
-									<a href="/mypage/myinfoedit">회원 정보 변경</a>
-								</h4>
-								<h4>
-									<a href="/mypage/pwchange">비밀번호 변경</a>
-								</h4>
-								<h4>
-									<a href="mypage-leave.html">회원 탈퇴</a>
-								</h4>
-
-							</aside>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-		<footer>
-			<div class="container_footer">
-				<div class="logo_line">
-					<span class="logo2"> <img src="./img/logo-img2.png" />
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <footer>
+        <div class="container_footer">
+            <div class="logo_line">
+					<span class="logo2"> <img src="./img/logo-img2.png"/>
 					</span>
-				</div>
+            </div>
 
-				<div class="menu_line">
-					<ul class="menus">
-						<span>Menu</span>
-						<li><a href="notice-board.html">공지사항</a></li>
-						<li><a href="local-information-board.html">국내여행</a></li>
-						<li><a href="world-information-board.html">해외여행</a></li>
-						<li><a href="free-board.html">커뮤니티</a></li>
-					</ul>
-				</div>
+            <div class="menu_line">
+                <ul class="menus">
+                    <span>Menu</span>
+                    <li><a href="notice-board.html">공지사항</a></li>
+                    <li><a href="local-information-board.html">국내여행</a></li>
+                    <li><a href="world-information-board.html">해외여행</a></li>
+                    <li><a href="free-board.html">커뮤니티</a></li>
+                </ul>
+            </div>
 
-				<div class="address_line">
-					<ul class="address">
-						<span>Contact</span>
-						<li>
-							<p>대표번호 : 010-1234-5678</p>
-						</li>
-						<li>
-							<p>팩스 : 070-2345-6789</p>
-						</li>
-						<li>
-							<p>이메일 : info@tripon.com</p>
-						</li>
-					</ul>
-				</div>
-			</div>
+            <div class="address_line">
+                <ul class="address">
+                    <span>Contact</span>
+                    <li>
+                        <p>대표번호 : 010-1234-5678</p>
+                    </li>
+                    <li>
+                        <p>팩스 : 070-2345-6789</p>
+                    </li>
+                    <li>
+                        <p>이메일 : info@tripon.com</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-			<div class="copyright">
-				<p>Copyright © TRIPON Inc. All Rights Reserved.</p>
-			</div>
-		</footer>
-	</div>
+        <div class="copyright">
+            <p>Copyright © TRIPON Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

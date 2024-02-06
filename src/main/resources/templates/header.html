@@ -4,56 +4,74 @@
       th:lang="ko">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}"/>
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin/>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+
+    <script th:src="@{https://kit.fontawesome.com/7aca531ae5.js}" crossorigin="anonymous"></script>
+    <script th:src="@{https://kit.fontawesome.com/83aa94ddcc.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <script th:src="@{/js/navbar.js}" defer></script>
+
     <title>Title</title>
-  <link rel="stylesheet" th:href="@{/css/nav.css}">
-  <script th:src="@{/js/navbar.js}" defer></script>
-  <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
 </head>
 <body>
 <header>
-  <nav class="head">
-    <div class="logo">
-      <a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
-      </a>
-    </div>
+    <nav class="head">
+        <div class="logo">
+            <a href="/main"> <img th:src="@{/img/logo-img2.png}"/>
+            </a>
+        </div>
 
-    <ul class="menu">
-      <li><a href="/local-information-board" class="domestic">국내여행</a>
-        <ul class="innerdomsestic">
-          <li><a href="/Local/Information">여행지정보</a></li>
-          <li><a href="/Local/Gyotong">항공/교통</a></li>
-          <li><a href="/Local/Friends">일행구하기</a></li>
-          <li><a href="/Local/Review">여행후기</a></li>
-        </ul></li>
-      <li><a href="/world-information-board" class="overseas">해외여행</a>
-        <ul class="inneroverseas">
-          <li><a href="/World/Information">여행지정보</a></li>
-          <li><a href="/World-gyotong-board">항공/교통</a></li>
-          <li><a href="/World-friends-board">일행구하기</a></li>
-          <li><a href="/World-review-board">여행후기</a></li>
-        </ul></li>
-      <li><a href="/free-board" class="questionfree">커뮤니티</a>
-        <ul class="innerquestionfree">
-          <li><a href="/Community/FreeBoard">자유게시판</a></li>
-          <li><a href="/Community/QnaBoard">질문게시판</a></li>
-        </ul></li>
-      <li><a href="/notice-board" class="notice">공지사항</a>
-        <ul class="innernotice">
-          <li><a href="/notice-board">공지사항</a></li>
-          <li><a href="/support-board">고객지원</a></li>
-        </ul></li>
-    </ul>
+        <ul class="menu">
+            <li><a href="/local-information-board" class="domestic">국내여행</a>
+                <ul class="innerdomsestic">
+                    <li><a href="/Local/Information">여행지정보</a></li>
+                    <li><a href="/Local/Gyotong">항공/교통</a></li>
+                    <li><a href="/Local/Friends">일행구하기</a></li>
+                    <li><a href="/Local/Review">여행후기</a></li>
+                </ul>
+            </li>
+            <li><a href="/world-information-board" class="overseas">해외여행</a>
+                <ul class="inneroverseas">
+                    <li><a href="/World/Information">여행지정보</a></li>
+                    <li><a href="/World-gyotong-board">항공/교통</a></li>
+                    <li><a href="/World-friends-board">일행구하기</a></li>
+                    <li><a href="/World-review-board">여행후기</a></li>
+                </ul>
+            </li>
+            <li><a href="/free-board" class="questionfree">커뮤니티</a>
+                <ul class="innerquestionfree">
+                    <li><a href="/Community/FreeBoard">자유게시판</a></li>
+                    <li><a href="/Community/QnaBoard">질문게시판</a></li>
+                </ul>
+            </li>
+            <li><a href="/notice-board" class="notice">공지사항</a>
+                <ul class="innernotice">
+                    <li><a href="/notice-board">공지사항</a></li>
+                    <li><a href="/support-board">고객지원</a></li>
+                </ul>
+            </li>
+        </ul>
 
-    <ul sec:authorize="isAnonymous()" class="member">
-      <a href="/sign/signin"><li>로그인</li></a>
-      <a href="/sign/signup"><li>회원가입</li></a>
-    </ul>
+        <ul sec:authorize="isAnonymous()" class="member">
+            <a href="/sign/signin">
+                <li>로그인</li>
+            </a>
+            <a href="/sign/signup">
+                <li>회원가입</li>
+            </a>
+        </ul>
 
-    <ul sec:authorize="isAuthenticated()" class="info">
-        <li class="nickname"><a href="/mypage"><span th:text="${#authentication.principal.nick}">님</span></a></li>
-        <a href="/logout"><li class="logout">로그아웃</li></a>
-    </ul>
-  </nav>
+        <ul sec:authorize="isAuthenticated()" class="info">
+            <li class="nickname"><a href="/mypage"><span th:text="${#authentication.principal.nick}">님</span></a></li>
+            <a href="/logout">
+                <li class="logout">로그아웃</li>
+            </a>
+        </ul>
+    </nav>
 </header>
 </body>
 </html>
