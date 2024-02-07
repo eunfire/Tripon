@@ -22,4 +22,6 @@ public class BoardDTO {
     private LocalDateTime createdTime;
     private int views;
     private LocalDateTime editTime;
+
+    private String nick;
 }

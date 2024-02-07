@@ -60,7 +60,17 @@
     </select>
 
     <!-- 좋아요 추가 -->
-    <insert id="addLike" parameterType="likeDTO">
-        INSERT INTO like_table (memId, boardId) VALUES (#{memId}, #{boardId});
+    <insert id="addLike" parameterType="map">
+        INSERT INTO like_table (memId, boardId) VALUES (#{memId}, #{postId});
     </insert>
+
+    <!-- 좋아요 취소 -->
+    <delete id="removeLike" parameterType="map">
+        DELETE FROM like_table WHERE memId = #{memId} AND boardId = #{postId};
+    </delete>
+
+    <!-- 좋아요 조회 -->
+    <select id="getIsLiked" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM like_table WHERE boardId = #{postId} AND memId = #{memId};
+    </select>
 </mapper>

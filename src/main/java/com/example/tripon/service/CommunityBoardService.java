@@ -64,7 +64,17 @@ public class CommunityBoardService {
     }
 
     // 좋아요 추가
-    public void addLike(LikeDTO likeDTO) {
-        communityBoardRepository.addLike(likeDTO);
+    public int addLike(int postId, String memId) {
+        return communityBoardRepository.addLike(postId, memId);
     }
+
+    // 좋아요 취소
+    public int removeLike(int postId, String memId) {
+        return communityBoardRepository.removeLike(postId, memId);
+    }
+
+    public int getIsLiked(int postId, String memId) {
+       return communityBoardRepository.getIsLiked(postId, memId);
+    }
+
 }

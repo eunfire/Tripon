@@ -35,22 +35,21 @@
 							<form id="post-form" th:action="@{/Community/write}" method="post">
 								<div class="category-title-wrapper">
 									<div class="post-category">
-										<label for="postCategory"></label> <input id="postCategory"
-											type="text" name="cateId" placeholder="카테고리" list="post-category-option" />
-										<datalist id="post-category-option">
-											<option data-value="3">3</option>
-											<option data-value="4">4</option>
-											<option data-value="5">5</option>
-											<option data-value="6">6</option>
-											<option data-value="7">7</option>
-											<option data-value="8">8</option>
-											<option data-value="9">9</option>
-											<option data-value="10">10</option>
-											<option data-value="11">11</option>
-											<option data-value="12">12</option>
-											<option data-value="1">1</option>
-											<option data-value="2">2</option>
-										</datalist>
+										<label for="post-category-option"></label>
+										<select id="post-category-option", name="cateId">
+											<option value="3">여행지정보</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+										</select>
 									</div>
 
 									<input type="hidden" name="memId" th:value="${#authentication.name}">
