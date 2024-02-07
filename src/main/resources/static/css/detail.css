@@ -1,3 +1,6 @@
+@charset "UTF-8";
+/*게시판 목록*/
+
 * {
   margin: 0;
   padding: 0;
@@ -330,7 +333,7 @@ body {
   border-bottom: #f0f0f0 2px solid;
 }
 
-#post-category-option {
+#postCategory {
   color: white;
   font-size: 18px;
   border-style: none;
@@ -342,11 +345,11 @@ body {
   border-radius: 30px;
 }
 
-#post-category-option::placeholder {
+#postCategory::placeholder {
   color: white;
 }
 
-#post-category-option:focus {
+#postCategory:focus {
   outline: none;
 }
 
@@ -471,9 +474,82 @@ textarea {
   background-color: #0056b3;
 }
 
-.emptyHeart, .fullHeart{
-  width: 50px;
-  height: 50px;
-  cursor : pointer;
+
+
+
+
+.main-wrappers img {
+  margin: 10px; /* 이미지 간격 조정 */
 }
 
+.idx_board_wrap > div {
+  width: 1200px;
+  min-width: 1000px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0; /*게시판들 사이여백 없애기*/
+}
+
+.idx_board {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+  background: #F6F6F6;
+  /* box-shadow: 0px 0px 0.5px 1px #dfdfdf; */
+  box-shadow: rgba(25, 25, 25, 0.2) 0px 6px 10px;
+}
+
+.idx_board_wrap > div > div:nth-child(even) {
+  /*even-짝수 여기선 게시판 2번4번*/
+  margin-left: 5%; /*게시판들 사이 여백 4%*/
+  margin-right: 5%; /*게시판들 사이 여백 4%*/
+  margin-top: 1%; /*게시판들 사이 여백 4%*/
+  margin-bottom: 1%; /*게시판들 사이 여백 4%*/
+}
+
+
+.idx_board .list {
+  padding: 20px 30px 30px 30px;
+  font-size: 1.1rem;
+}
+
+.idx_board .list a,
+.idx_board .list span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.idx_board .list a {
+  /*.idx_board .list (ul li) 생략 a*/
+  width: 80%;
+  font-size: 16px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.idx_board .list span {
+  width: 20%;
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+}
+
+.list li a img {
+  width: 23px;
+  padding-right: 8px;
+  vertical-align: bottom;
+}
+
+.idx_board .list dl {
+  display: flex;
+}
+
+.idx_board .list dt {
+  margin-right: 5px;
+}
+
+.idx_board .list dd {
+  color: rgb(119, 119, 119);
+}

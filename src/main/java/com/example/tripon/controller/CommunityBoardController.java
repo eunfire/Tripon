@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -88,12 +89,35 @@ public class CommunityBoardController {
     }
 
     // 게시글 상세페이지 조회
-    @GetMapping("/post/{postId}")
-    public String showPostDetail(@PathVariable int postId, Model model) {
+    @GetMapping("/post")
+    public String showPostDetail(@RequestParam("postId") int postId, Principal principal, Model model) {
+
         // 게시글 조회수 증가
         communityBoardService.increaseViews(postId);
         BoardDTO post = communityBoardService.getBoardById(postId);
         model.addAttribute("post", post);
+
+        // 댓글 조회
+        List<CommentDTO> comments = communityBoardService.getCommentsByPostId(postId);
+        model.addAttribute("comments", comments);
+
+        int isLiked = 0;
+
+        if(principal != null) {
+            // 사용자 아이디 가져오기
+            String memId = principal.getName();
+            model.addAttribute("memId", memId);
+            // 좋아요 확인
+            isLiked = communityBoardService.getIsLiked(postId, memId);
+            model.addAttribute("isliked", isLiked);
+        } else {
+            model.addAttribute("memId", null);
+        }
+
+        // 좋아요수 조회
+        int likeCount = communityBoardService.getLikeCountByBoardId(postId);
+        model.addAttribute("likeCount", likeCount);
+
         return "post-detail";
     }
 
@@ -140,13 +164,13 @@ public class CommunityBoardController {
         return "redirect:/Community/post/" + postId;
     }
 
-    // 댓글 목록 조회
+    /* 댓글 목록 조회
     @GetMapping("/post/{postId}/comments")
     public String getCommentsForPost(@PathVariable int postId, Model model) {
         List<CommentDTO> comments = communityBoardService.getCommentsByPostId(postId);
         model.addAttribute("comments", comments);
         return "post-detail";
-    }
+    } */
 
     // 댓글 등록
     @PostMapping("/post/{postId}/comments")
@@ -156,19 +180,37 @@ public class CommunityBoardController {
         return "redirect:/Community/post/" + postId;
     }
 
-    // 좋아요 수 조회
+    /*// 좋아요 수 조회
     @GetMapping("/post/{postId}/like")
     public String getLikeCountForPost(@PathVariable int postId, Model model) {
         int boardId = communityBoardService.getLikeCountByBoardId(postId);
         model.addAttribute("boardId", boardId);
         return "post-detail";
-    }
+    }*/
 
     // 좋아요 추가
-    @PostMapping("/post/{postId}/like")
-    public String addLikeToPost(@PathVariable int postId, LikeDTO likeDTO) {
-        likeDTO.setBoardId(postId);
-        communityBoardService.addLike(likeDTO);
+    @PostMapping("/post/like")
+    public String addLikeToPost(@RequestParam("postId") int postId, Principal principal, int isLiked) {
+        String memId = principal.getName();
+        if (memId != null) {
+            int result = 0;
+
+            if (isLiked == 0) {
+                result = communityBoardService.addLike(postId, memId);
+            }
+            else if (isLiked == 1) {
+                result = communityBoardService.removeLike(postId, memId);
+            }
+            return "redirect:/Community/post/" + postId + "?result=" + result;
+        }
         return "redirect:/Community/post/" + postId;
     }
+
+    // 좋아요 취소
+    /*@PostMapping("/post/{postId}/unlike")
+    public String removeLikeFromPost(@PathVariable int postId, LikeDTO likeDTO) {
+        likeDTO.setBoardId(postId);
+        communityBoardService.removeLike(likeDTO);
+        return "redirect:/Community/post/" + postId;
+    }*/
 }

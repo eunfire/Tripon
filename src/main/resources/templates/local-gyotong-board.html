@@ -64,7 +64,7 @@
 										<div class="title">
 											<a th:href="@{/Local/post/{postId}(postId=${post.boardId})}" th:text="${post.title}"></a>
 										</div>
-										<div class="writer" th:text="${post.memId}"></div>
+										<div class="writer" th:text="${post.nick}"></div>
 										<div class="date" th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></div>
 										<div class="count" th:text="${post.views}"></div>
 									</div>
@@ -75,7 +75,7 @@
 								<a th:unless="${#authorization.expression('isAuthenticated()')}" href="#" onclick="showLoginAlert()">로그인 후 등록</a>
 							</div>
 							<!-- 페이징을 추가 -->
-							<div class="board-page-wrapper">
+							<div class="board-page-wrapper" th:if="${totalPages > 0}">
 								<div class="board_page">
 									<a th:href="@{/Local/Gyotong?page=1}" class="bt first"><<</a>
 									<a th:if="${currentPage > 1}" th:href="@{/Local/Gyotong(page=${currentPage - 1})}" class="bt prev">이전</a>

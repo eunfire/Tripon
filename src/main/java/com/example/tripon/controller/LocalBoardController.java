@@ -131,4 +131,14 @@ public class LocalBoardController {
         model.addAttribute("post", post);
         return "post-detail";
     }
+
+    // 게시글 상세페이지 조회 2
+    @GetMapping("/detail/{postId}")
+    public String showPostDetail2(@PathVariable int postId, Model model) {
+        // 게시글 조회수 증가
+        localBoardService.increaseViews(postId);
+        BoardDTO post = localBoardService.getBoardById(postId);
+        model.addAttribute("post", post);
+        return "friends-detail";
+    }
 }

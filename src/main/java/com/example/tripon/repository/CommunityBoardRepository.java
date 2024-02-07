@@ -69,7 +69,30 @@ public class CommunityBoardRepository {
     }
 
     // 좋아요 추가
-    public void addLike(LikeDTO likeDTO) {
-        sql.insert("free.addLike", likeDTO);
+    public int addLike(int postId, String memId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("postId", postId);
+        params.put("memId", memId);
+        return sql.insert("free.addLike", params);
+    }
+
+    // 좋아요 취소
+    public int removeLike(int postId, String memId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("postId", postId);
+        params.put("memId", memId);
+        return sql.delete("free.removeLike", params);
+    }
+
+    public int getIsLiked(int postId, String memId) {
+        // MyBatis의 SqlSession을 사용하여 쿼리를 실행하고 결과를 반환한다.
+        // 쿼리를 실행할 때는 Map을 사용하여 파라미터를 전달한다.
+        Map<String, Object> params = new HashMap<>();
+        params.put("postId", postId);
+        params.put("memId", memId);
+
+        // sqlSession.selectOne() 메서드를 사용하여 한 개의 결과만 반환한다.
+        // 결과가 없을 경우 null을 반환하므로, null이 아닐 때는 true를 반환하도록 한다.
+        return sql.selectOne("free.getIsLiked", params);
     }
 }
