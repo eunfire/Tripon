@@ -64,4 +64,23 @@ public class MypageRepository {
     public int getMyReplyCount(String nick) {
         return sql.selectOne("mypage.getMyReplyCount", nick);
     }
+
+    // 검색한 작성 글 조회
+    public List<BoardDTO> searchMyList(String search, String memId, int startIndex, int pageSize) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("memId", memId);
+        params.put("startIndex", startIndex);
+        params.put("pageSize", pageSize);
+        return sql.selectList("mypage.searchMyList", params);
+    }
+
+    public int searchMyListCount(String search, String memId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("memId", memId);
+        return sql.selectOne("mypage.searchMyListCount", params);
+    }
+
+    // 검색한 작성 글 수 조회
 }

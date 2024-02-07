@@ -85,13 +85,21 @@
                             </div>
                             <div class="board-page-wrapper" th:if="${totalPages > 0}">
                                 <div class="board_page">
-                                    <a th:href="@{/mypage/myinforeply?page=1}" class="bt first"><<</a>
-                                    <a th:if="${currentPage > 1}" th:href="@{/mypage/myinforeply(page=${currentPage - 1})}" class="bt prev">이전</a>
+                                    <a th:if="${currentPage > 1}" th:href="@{/mypage/myinforeply?page=1}"
+                                       class="bt first">&lt;&lt;</a>
+                                    <a th:if="${currentPage > 1}"
+                                       th:href="@{/mypage/myinforeply(page=${currentPage - 1})}"
+                                       class="bt prev">&lt;</a>
                                     <th:block th:each="pageNo: ${#numbers.sequence(1, totalPages)}">
-                                        <a th:href="@{/mypage/myinforeply(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
+                                        <a th:href="@{/mypage/myinforeply(page=${pageNo})}"
+                                           th:class="${pageNo == currentPage} ? 'num on' : 'num'"
+                                           th:text="${pageNo}"></a>
                                     </th:block>
-                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinforeply(page=${currentPage + 1})}" class="bt next">다음</a>
-                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinforeply(page=${totalPages})}" class="bt last">>></a>
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{/mypage/myinforeply(page=${currentPage + 1})}"
+                                       class="bt next">&gt;</a>
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{/mypage/myinforeply(page=${totalPages})}" class="bt last">&gt;&gt;</a>
                                 </div>
                             </div>
 

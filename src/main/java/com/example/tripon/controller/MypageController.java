@@ -43,15 +43,16 @@ public class MypageController {
 
     // 비밀번호 확인 프로세스
     @PostMapping("/checkpwprocess")
-    public ResponseEntity<String> checkPwProcess(Principal principal, String pw){
+    public ResponseEntity<String> checkPwProcess(Principal principal, String pw) {
         // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
         // 현재 비밀번호 확인
         boolean isValidPw = mypageService.pwChecked(memId, pw);
 
-        if(isValidPw) {
+        if (isValidPw) {
             return ResponseEntity.ok("success");
-        }return ResponseEntity.ok("fail");
+        }
+        return ResponseEntity.ok("fail");
     }
 
     // 회원 정보 수정
@@ -114,7 +115,7 @@ public class MypageController {
 
     // 내가 작성한 게시글 목록 조회
     @GetMapping("/myinfowrite")
-    public String getMyList(Principal principal, Model model, @RequestParam(defaultValue="1") int page) {
+    public String getMyList(Principal principal, Model model, @RequestParam(name = "search", required = false, defaultValue = "") String search, @RequestParam(defaultValue = "1") int page) {
         // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
 
@@ -124,22 +125,36 @@ public class MypageController {
         // 해당 페이지의 시작 인덱스 계산
         int startIndex = (page - 1) * pageSize;
 
-        // 작성한 게시글 목록을 조회
-        List<BoardDTO> myList = mypageService.getMyList(memId, startIndex, pageSize);
-        model.addAttribute("mylist", myList);
+        List<BoardDTO> myList;
 
-        // 총 페이지 수와 현재 페이지 번호 모델에 추가
-        int totalPosts = mypageService.getMyListCount(memId);
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
+        // 검색 파라미터에 따라 다른 쿼리를 실행하고 결과를 보여주도록 로직 구성
+        if (!search.isEmpty()) {
+            myList = mypageService.searchMyList(search, memId, startIndex, pageSize);
+            model.addAttribute("mylist", myList);
 
+            // 총 페이지 수와 현재 페이지 번호 모델에 추가
+            int totalPosts = mypageService.searchMyListCount(search, memId);
+            int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+        } else {
+            // 검색 파라미터가 비어 있으면 전체 리스트를 가져오도록 처리
+            myList = mypageService.getMyList(memId, startIndex, pageSize);
+            model.addAttribute("mylist", myList);
+
+            // 총 페이지 수와 현재 페이지 번호 모델에 추가
+            int totalPosts = mypageService.getMyListCount(memId);
+            int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+        }
         return "mypage-writing";
     }
 
+
     // 내가 작성한 댓글 목록 조회
     @GetMapping("/myinforeply")
-    public String getMyReply(Principal principal, Model model, @RequestParam(defaultValue="1") int page) {
+    public String getMyReply(Principal principal, Model model, @RequestParam(defaultValue = "1") int page) {
         // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
 

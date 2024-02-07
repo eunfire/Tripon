@@ -35,11 +35,12 @@
                                 <strong>작성 글</strong>
                             </div>
                             <div class="search-box">
-                                <input type="text" class="search-txt" name=""
-                                       placeholder="찾고 싶은 작성글을 입력하세요"> <a class="search-btn"
-                                                                          href="#"> <img class='search-btn2'
-                                                                                         src="img/search-btn2.png">
-                            </a>
+                                <form class="search" th:action="@{/mypage/myinfowrite}" method="get">
+                                    <input type="text" class="search-txt" name="search" placeholder="찾고 싶은 작성글을 입력하세요">
+                                    <button class="btn2">
+                                        <img class='search-btn2' th:src="@{/img/search-btn2.png}">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div class="board_list_wrap">
@@ -70,13 +71,21 @@
                             </div>
                             <div class="board-page-wrapper" th:if="${totalPages > 0}">
                                 <div class="board_page">
-                                    <a th:href="@{/mypage/myinfowrite?page=1}" class="bt first"><<</a>
-                                    <a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite(page=${currentPage - 1})}" class="bt prev">이전</a>
+                                    <a th:if="${currentPage > 1}" th:href="@{/mypage/myinfowrite?page=1}"
+                                       class="bt first">&lt;&lt;</a>
+                                    <a th:if="${currentPage > 1}"
+                                       th:href="@{/mypage/myinfowrite(page=${currentPage - 1})}"
+                                       class="bt prev">&lt;</a>
                                     <th:block th:each="pageNo: ${#numbers.sequence(1, totalPages)}">
-                                        <a th:href="@{/mypage/myinfowrite(page=${pageNo})}" th:class="${pageNo == currentPage} ? 'num on' : 'num'" th:text="${pageNo}"></a>
+                                        <a th:href="@{/mypage/myinfowrite(page=${pageNo})}"
+                                           th:class="${pageNo == currentPage} ? 'num on' : 'num'"
+                                           th:text="${pageNo}"></a>
                                     </th:block>
-                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${currentPage + 1})}" class="bt next">다음</a>
-                                    <a th:if="${currentPage < totalPages}" th:href="@{/mypage/myinfowrite(page=${totalPages})}" class="bt last">>></a>
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{/mypage/myinfowrite(page=${currentPage + 1})}"
+                                       class="bt next">&gt;</a>
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{/mypage/myinfowrite(page=${totalPages})}" class="bt last">&gt;&gt;</a>
                                 </div>
                             </div>
 

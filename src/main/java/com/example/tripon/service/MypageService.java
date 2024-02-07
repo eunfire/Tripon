@@ -81,4 +81,16 @@ public class MypageService {
     public int getMyReplyCount(String nick) {
         return repo.getMyReplyCount(nick);
     }
+
+    // 검색한 작성 글 조회
+    public List<BoardDTO> searchMyList(String search, String memId, int startIndex, int pageSize) {
+        return repo.searchMyList(search, memId, startIndex, pageSize);
+    }
+
+    // 검색한 작성 글 수 조회
+    public int searchMyListCount(String search, String memId) {
+        return repo.searchMyListCount(search, memId);
+    }
+
+
 }
