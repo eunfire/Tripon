@@ -92,5 +92,15 @@ public class MypageService {
         return repo.searchMyListCount(search, memId);
     }
 
+    // 검색한 작성 글 조회
+    public List<CommentDTO> searchMyReply(String search, String nick, int startIndex, int pageSize) {
+        return repo.searchMyReply(search, nick, startIndex, pageSize);
+    }
+
+    // 검색한 작성 글 수 조회
+    public int searchMyReplyCount(String search, String nick) {
+        return repo.searchMyReplyCount(search, nick);
+    }
+
 
 }

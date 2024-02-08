@@ -1,28 +1,29 @@
-/*$(document).ready(function () {
-    var login = '${memId}';
-
-    function liked(p, l) {
-        if (login == "null") {
-            alert ("로그인이 필요합니다.");
-        }
-        else {
-            location.href = "/Community/post/" + p + "/like?postId=" + p + "&isLiked=" + l;
-        }
-    }
-});*/
-
 $(document).ready(function () {
-    var memId = '${memId}'; // principal.getName()을 통해 가져온 사용자 아이디
 
-    // 좋아요 버튼에 대한 클릭 이벤트 핸들러
     $('.fullHeart, .emptyHeart').click(function() {
-        var postId = $(this).data('post-id'); // 클릭한 SVG의 data-post-id 속성 값 가져오기
-        var isLiked = $(this).data('is-liked'); // 클릭한 SVG의 data-is-liked 속성 값 가져오기
+        var postId = $(this).data('postid');
+        var isLiked = $(this).data('isliked');
+        console.log(postId)
+        console.log(isLiked)
 
-        if (memId === "null") {
-            alert("로그인이 필요합니다.");
-        } else {
-            location.href = "/Community/post/like?postId=" + postId + "&isLiked=" + isLiked;
+        liked(postId, isLiked);
+        function liked(postId, isLiked) {
+            $.ajax({
+                url: "/Community/post/" + postId + "/like",
+                method: "POST",
+                data: { postId: postId, isLiked: isLiked },
+                success: function(response) {
+                    if(response === "Login required" ) {
+                        alert("좋아요를 누를려면 로그인이 필요합니다.");
+                    } else {
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 오류 처리
+                    console.error('좋아요 요청에 실패했습니다.');
+                }
+            });
         }
     });
 });

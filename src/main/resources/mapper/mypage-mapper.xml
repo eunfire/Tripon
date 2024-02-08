@@ -81,4 +81,22 @@
         FROM boardcomment
         WHERE nick = #{nick};
     </select>
+
+    <!-- 검색한 작성 댓글 조회 -->
+    <select id="searchMyReply" parameterType="map" resultType="commentDto">
+        SELECT *
+        FROM boardcomment
+        WHERE nick = #{nick}
+          AND bcContent LIKE CONCAT('%', #{search}, '%')
+        ORDER BY bcId DESC
+            LIMIT #{startIndex}, #{pageSize};
+    </select>
+
+    <!-- 검색한 작성 댓글 수 조회 -->
+    <select id="searchMyReplyCount" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM boardcomment
+        WHERE nick = #{nick}
+          AND bcContent LIKE CONCAT('%', #{search}, '%');
+    </select>
 </mapper>

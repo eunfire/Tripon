@@ -35,11 +35,12 @@
                                 <strong>작성 댓글</strong>
                             </div>
                             <div class="search-box">
-                                <input type="text" class="search-txt" name=""
-                                       placeholder="찾고 싶은 작성댓글을 입력하세요"> <a class="search-btn"
-                                                                           href="#"> <img class='search-btn2'
-                                                                                          src="img/search-btn2.png">
-                            </a>
+                                <form class="search" th:action="@{/mypage/myinforeply}" method="get">
+                                    <input type="text" class="search-txt" name="search" placeholder="찾고 싶은 작성글을 입력하세요">
+                                    <button class="btn2">
+                                        <img class='search-btn2' th:src="@{/img/search-btn2.png}">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div class="board_list_wrap">

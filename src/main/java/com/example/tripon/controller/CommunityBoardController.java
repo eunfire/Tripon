@@ -2,9 +2,9 @@ package com.example.tripon.controller;
 
 import com.example.tripon.dto.BoardDTO;
 import com.example.tripon.dto.CommentDTO;
-import com.example.tripon.dto.LikeDTO;
 import com.example.tripon.service.CommunityBoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -89,9 +89,8 @@ public class CommunityBoardController {
     }
 
     // 게시글 상세페이지 조회
-    @GetMapping("/post")
-    public String showPostDetail(@RequestParam("postId") int postId, Principal principal, Model model) {
-
+    @GetMapping("/post/{postId}")
+    public String showPostDetail(@PathVariable int postId, Principal principal, Model model) {
         // 게시글 조회수 증가
         communityBoardService.increaseViews(postId);
         BoardDTO post = communityBoardService.getBoardById(postId);
@@ -101,6 +100,8 @@ public class CommunityBoardController {
         List<CommentDTO> comments = communityBoardService.getCommentsByPostId(postId);
         model.addAttribute("comments", comments);
 
+        // 좋아요 여부 확인
+        model.addAttribute("postId", postId);
         int isLiked = 0;
 
         if(principal != null) {
@@ -109,9 +110,14 @@ public class CommunityBoardController {
             model.addAttribute("memId", memId);
             // 좋아요 확인
             isLiked = communityBoardService.getIsLiked(postId, memId);
-            model.addAttribute("isliked", isLiked);
+
+            if(isLiked == 0) {
+                model.addAttribute("isliked", isLiked);
+            } else {
+                model.addAttribute("isliked", isLiked);
+            }
         } else {
-            model.addAttribute("memId", null);
+            model.addAttribute("isliked", isLiked);
         }
 
         // 좋아요수 조회
@@ -180,37 +186,19 @@ public class CommunityBoardController {
         return "redirect:/Community/post/" + postId;
     }
 
-    /*// 좋아요 수 조회
-    @GetMapping("/post/{postId}/like")
-    public String getLikeCountForPost(@PathVariable int postId, Model model) {
-        int boardId = communityBoardService.getLikeCountByBoardId(postId);
-        model.addAttribute("boardId", boardId);
-        return "post-detail";
-    }*/
-
     // 좋아요 추가
-    @PostMapping("/post/like")
-    public String addLikeToPost(@RequestParam("postId") int postId, Principal principal, int isLiked) {
-        String memId = principal.getName();
-        if (memId != null) {
-            int result = 0;
-
+    @PostMapping("/post/{postId}/like")
+    public ResponseEntity<String> addLikeToPost(@PathVariable int postId, Principal principal, @RequestParam int isLiked) {
+        if (principal != null) {
+            String memId = principal.getName();
             if (isLiked == 0) {
-                result = communityBoardService.addLike(postId, memId);
+                communityBoardService.addLike(postId, memId);
+            } else if (isLiked == 1) {
+                communityBoardService.removeLike(postId, memId);
             }
-            else if (isLiked == 1) {
-                result = communityBoardService.removeLike(postId, memId);
-            }
-            return "redirect:/Community/post/" + postId + "?result=" + result;
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.ok("Login required");
         }
-        return "redirect:/Community/post/" + postId;
     }
-
-    // 좋아요 취소
-    /*@PostMapping("/post/{postId}/unlike")
-    public String removeLikeFromPost(@PathVariable int postId, LikeDTO likeDTO) {
-        likeDTO.setBoardId(postId);
-        communityBoardService.removeLike(likeDTO);
-        return "redirect:/Community/post/" + postId;
-    }*/
 }

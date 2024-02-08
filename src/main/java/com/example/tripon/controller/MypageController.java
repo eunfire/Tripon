@@ -154,7 +154,7 @@ public class MypageController {
 
     // 내가 작성한 댓글 목록 조회
     @GetMapping("/myinforeply")
-    public String getMyReply(Principal principal, Model model, @RequestParam(defaultValue = "1") int page) {
+    public String getMyReply(Principal principal, Model model, @RequestParam(name = "search", required = false, defaultValue = "") String search, @RequestParam(defaultValue = "1") int page) {
         // 로그인한 사용자 아이디 가져오기
         String memId = principal.getName();
 
@@ -167,15 +167,32 @@ public class MypageController {
         // 해당 페이지의 시작 인덱스 계산
         int startIndex = (page - 1) * pageSize;
 
+        List<CommentDTO> myReply;
+
+        // 검색 파라미터에 따라 다른 쿼리를 실행하고 결과를 보여주도록 로직 구성
+        if (!search.isEmpty()) {
+
         // 작성한 게시글 목록을 조회
-        List<CommentDTO> myReply = mypageService.getMyReply(nick, startIndex, pageSize);
+        myReply = mypageService.searchMyReply(search, nick, startIndex, pageSize);
         model.addAttribute("myreply", myReply);
 
         // 총 페이지 수와 현재 페이지 번호 모델에 추가
-        int totalPosts = mypageService.getMyReplyCount(nick);
+        int totalPosts = mypageService.searchMyReplyCount(search, nick);
         int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+
+        } else {
+            // 작성한 게시글 목록을 조회
+            myReply = mypageService.getMyReply(nick, startIndex, pageSize);
+            model.addAttribute("myreply", myReply);
+
+            // 총 페이지 수와 현재 페이지 번호 모델에 추가
+            int totalPosts = mypageService.getMyReplyCount(nick);
+            int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+        }
 
         return "mypage-reply";
     }

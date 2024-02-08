@@ -75,6 +75,7 @@ public class MypageRepository {
         return sql.selectList("mypage.searchMyList", params);
     }
 
+    // 검색한 작성 글 수 조회
     public int searchMyListCount(String search, String memId) {
         Map<String, Object> params = new HashMap<>();
         params.put("search", search);
@@ -82,5 +83,21 @@ public class MypageRepository {
         return sql.selectOne("mypage.searchMyListCount", params);
     }
 
-    // 검색한 작성 글 수 조회
+    // 검색한 작성 댓글 조회
+    public List<CommentDTO> searchMyReply(String search, String nick, int startIndex, int pageSize) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("nick", nick);
+        params.put("startIndex", startIndex);
+        params.put("pageSize", pageSize);
+        return sql.selectList("mypage.searchMyReply", params);
+    }
+
+    // 검색한 작성 댓글 수 조회
+    public int searchMyReplyCount(String search, String nick) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("nick", nick);
+        return sql.selectOne("mypage.searchMyReplyCount", params);
+    }
 }
