@@ -129,6 +129,7 @@ public class MypageController {
 
         // 검색 파라미터에 따라 다른 쿼리를 실행하고 결과를 보여주도록 로직 구성
         if (!search.isEmpty()) {
+            // 검색한 작성 글 목록을 조회
             myList = mypageService.searchMyList(search, memId, startIndex, pageSize);
             model.addAttribute("mylist", myList);
 
@@ -171,19 +172,18 @@ public class MypageController {
 
         // 검색 파라미터에 따라 다른 쿼리를 실행하고 결과를 보여주도록 로직 구성
         if (!search.isEmpty()) {
+            // 검색한 작성 댓글 목록을 조회
+            myReply = mypageService.searchMyReply(search, nick, startIndex, pageSize);
+            model.addAttribute("myreply", myReply);
 
-        // 작성한 게시글 목록을 조회
-        myReply = mypageService.searchMyReply(search, nick, startIndex, pageSize);
-        model.addAttribute("myreply", myReply);
-
-        // 총 페이지 수와 현재 페이지 번호 모델에 추가
-        int totalPosts = mypageService.searchMyReplyCount(search, nick);
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
+            // 총 페이지 수와 현재 페이지 번호 모델에 추가
+            int totalPosts = mypageService.searchMyReplyCount(search, nick);
+            int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
 
         } else {
-            // 작성한 게시글 목록을 조회
+            // 검색 파라미터가 비어 있으면 전체 리스트를 가져오도록 처리
             myReply = mypageService.getMyReply(nick, startIndex, pageSize);
             model.addAttribute("myreply", myReply);
 
