@@ -66,7 +66,7 @@
 											<div class="title">
 												<a th:href="@{/Community/post/{postId}(postId=${post.boardId})}" th:text="${post.title}"></a>
 											</div>
-											<div class="writer" th:text="${post.memId}"></div>
+											<div class="writer" th:text="${post.nick}"></div>
 											<div class="date" th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></div>
 											<div class="count" th:text="${post.views}"></div>
 										</div>

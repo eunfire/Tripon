@@ -1,39 +1,15 @@
-// @ts-nocheck
-
-// document.getElementById('post-form').addEventListener('submit', async (e) => {
-//   e.preventDefault();
-
-//   const postTitle = document.getElementById('postTitle').value;
-//   const postContent = document.getElementById('postContent').value;
-//   const postImage = document.getElementById('postImage').files[0];
-
-//   const formData = new FormData();
-//   formData.append('postTitle', postTitle);
-//   formData.append('postContent', postContent);
-
-//   if (postImage) {
-//     formData.append('postImage', postImage);
-//   }
-
-//   try {
-//     const response = await fetch('/api/posts', {
-//       method: 'POST',
-//       body: formData,
-//     });
-
-//     if (!response.ok) {
-//       throw new Error('업로드에 실패했습니다.');
-//     }
-
-//     alert('게시물이 작성되었습니다.');
-//     window.location.href = '/boards.html';
-//   } catch (error) {
-//     alert(error.message);
-//   }
-// });
-
 const imageInput = document.getElementById('imageInput');
 const editableDiv = document.getElementById('editableDiv');
+
+document.getElementById("post-form").addEventListener("submit", function() {
+  var editableDivContent = document.getElementById("editableDiv").innerText;
+  document.getElementById("postContent").value = editableDivContent;
+
+  if (!document.getElementById("postContent").value.trim()) {
+    event.preventDefault(); // 제출을 막습니다.
+    alert("내용을 입력하세요."); // 사용자에게 알림을 표시합니다.
+  }
+});
 
 // 이미지가 선택될 때마다 미리보기를 표시하는 이벤트 리스너
 imageInput.addEventListener('change', function (event) {
@@ -62,40 +38,3 @@ function showImagePreview(file) {
   };
   reader.readAsDataURL(file);
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  const startDateInput = document.getElementById('startDate');
-  const endDateInput = document.getElementById('endDate');
-  const resetStartDateBtn = document.getElementById('resetStartDate');
-  const resetEndDateBtn = document.getElementById('resetEndDate');
-
-  startDateInput.addEventListener('click', function () {
-    showCalendar(startDateInput);
-  });
-
-  endDateInput.addEventListener('click', function () {
-    showCalendar(endDateInput);
-  });
-
-  resetStartDateBtn.addEventListener('click', function () {
-    startDateInput.value = '';
-  });
-
-  resetEndDateBtn.addEventListener('click', function () {
-    endDateInput.value = '';
-  });
-
-  function showCalendar(inputElement) {
-    let calendar = document.createElement('input');
-    calendar.type = 'date';
-    calendar.style.display = 'none';
-    inputElement.parentNode.appendChild(calendar);
-
-    calendar.click();
-
-    calendar.addEventListener('change', function () {
-      inputElement.value = calendar.value;
-      inputElement.parentNode.removeChild(calendar);
-    });
-  }
-});

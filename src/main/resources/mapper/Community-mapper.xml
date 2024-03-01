@@ -4,7 +4,7 @@
 <mapper namespace="free">
     <!-- cateId가 1이고 페이징된 게시글 목록 조회 -->
     <select id="getBoardsByCateIdWithPaging" parameterType="map" resultType="boardDTO">
-        SELECT * FROM board WHERE cateId = #{cateId}
+        SELECT board.*, member.nick FROM board JOIN member ON board.memId = member.memId WHERE cateId = #{cateId}
         ORDER BY boardId DESC
         LIMIT #{startIndex}, #{pageSize};
     </select>

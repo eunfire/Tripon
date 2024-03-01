@@ -12,24 +12,9 @@
 	<link rel="stylesheet" th:href="@{/css/nav.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<script th:src="@{/js/navbar.js}" defer></script>
-	<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+	<script th:src="@{/js/writePost.js}" defer></script>
 
-	<script>
-		function setThumbnail(event) {
-			for (var image of event.target.files) {
-				var reader = new FileReader();
 
-				reader.onload = function(event) {
-					var img = document.createElement("img");
-					img.setAttribute("src", event.target.result);
-					document.querySelector("div#image_container").appendChild(img);
-				};
-
-				console.log(image);
-				reader.readAsDataURL(image);
-			}
-		}
-	</script>
 
 <title>게시물 작성 페이지</title>
 </head>
@@ -92,9 +77,10 @@
 								<div class="form-group">
 									<label for="postContent"></label>
 									<div id="editableDiv" contenteditable="true"
-										placeholder="이번 여행에 대한 정보를 공유해 주세요"></div>
-									<textarea id="postContent" name="content" required></textarea>
+										 placeholder="이번 여행에 대한 정보를 공유해 주세요"></div>
+									<textarea id="postContent" name="content" hidden></textarea>
 								</div>
+
 								<div class="imgupload-submit-wrapper">
 									<div class="post-image-wrapper">
 										<label for="imageInput">
@@ -103,7 +89,7 @@
 											</svg>
 											<div>사진 추가</div>
 										</label>
-										<input type="file" id="imageInput" name="images" onchange="setThumbnail(event);" accept="image/*" multiple/>
+										<input type="file" id="imageInput" name="images" accept="image/*" multiple/>
 										<div id="image_container"></div>
 									</div>
 									<div id="fileNamesDisplay"></div>
@@ -153,6 +139,6 @@
 			</div>
 		</footer>
 	</div>
-	<script src="./js/writePost.js"></script>
+
 </body>
 </html>
