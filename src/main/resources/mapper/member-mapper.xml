@@ -17,4 +17,8 @@
     <select id="checkNick" parameterType="String" resultType="String">
         SELECT nick FROM member WHERE nick = #{nick}
     </select>
+
+    <select id="checkEmail" parameterType="String" resultType="String">
+        SELECT email FROM member WHERE email = #{email}
+    </select>
 </mapper>

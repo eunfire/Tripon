@@ -29,4 +29,7 @@ public class MemberRepository {
         return sql.selectOne("member.checkNick", nick);
     }
 
+    public String checkEmail(String email) {
+        return sql.selectOne("member.checkEmail", email);
+    }
 }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8"/>
     <link rel="preconnect" th:href="@{https://fonts.googleapis.com}"/>
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin/>
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}"/>
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}">
     <link rel="stylesheet" th:href="@{/css/mypage-check-board.css}"/>
     <link rel="stylesheet" th:href="@{/css/nav.css}"/>
@@ -88,7 +88,7 @@
                         <a href="/mypage/pwchange">비밀번호 변경</a>
                     </h4>
                     <h4>
-                        <a href="mypage-leave.html">회원 탈퇴</a>
+                        <a href="/mypage/delete">회원 탈퇴</a>
                     </h4>
 
                 </aside>
