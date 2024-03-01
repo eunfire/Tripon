@@ -32,7 +32,7 @@
     </delete>
 
     <!-- 게시글 등록 -->
-    <insert id="addPost" parameterType="boardDTO">
+    <insert id="addPost" parameterType="boardDTO" useGeneratedKeys="true" keyProperty="boardId">
         INSERT INTO board (`memId`, `cateId`, `title`, `content`, `tStart`, `tEnd`)
         VALUES (#{memId}, #{cateId}, #{title}, #{content}, #{tStart}, #{tEnd})
     </insert>
@@ -49,9 +49,14 @@
         INSERT INTO boardComment (boardId, nick, bcContent) VALUES (#{boardId}, #{nick}, #{bcContent})
     </insert>
 
+    <!-- 대댓글 등록 -->
+    <insert id="add_comment" parameterType="CommentDTO">
+        INSERT INTO boardComment (boardId, nick, bcContent, parentId) VALUES (#{boardId}, #{nick}, #{bcContent}, #{parentId})
+    </insert>
+
     <!-- 댓글 조회 -->
     <select id="getCommentsByPostId" parameterType="int" resultType="CommentDTO">
-        SELECT * FROM boardComment WHERE boardId = #{postId}
+        SELECT * FROM boardComment WHERE boardId = #{postId} order by parentId asc
     </select>
 
     <!-- 게시물별 좋아요 수 조회 -->
@@ -73,4 +78,50 @@
     <select id="getIsLiked" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM like_table WHERE boardId = #{postId} AND memId = #{memId};
     </select>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteCommentById" parameterType="int">
+        DELETE FROM boardComment WHERE bcId = #{bcId}
+    </delete>
+
+    <select id="getChildComments" parameterType="int" resultType="CommentDTO">
+        SELECT * FROM boardComment WHERE parentId = #{parentId}
+    </select>
+
+    <update id="updateDeleteComment" parameterType="int">
+        UPDATE boardcomment
+        SET deleted = TRUE
+        WHERE bcId = #{bcId};
+    </update>
+
+    <select id="searchParentId" parameterType="int" resultType="CommentDTO">
+        select parentId from boardComment WHERE parentId = #{bcId};
+    </select>
+
+    <!-- 삭제 여부 확인 -->
+    <select id="deletedComment" parameterType="int" resultType="boolean">
+        select deleted from boardComment WHERE bcId = #{bcId};
+    </select>
+
+    <select id="searchParentBcId" parameterType="int" resultType="int">
+        SELECT parentId FROM boardComment WHERE bcId = #{bcId};
+    </select>
+
+    <!-- 댓글 수정 -->
+    <update id="editComment" parameterType="CommentDTO">
+        UPDATE boardComment
+        SET bcContent = #{bcContent} WHERE bcId = #{bcId};
+    </update>
+
+    <!-- 파일 저장 -->
+    <insert id="saveFile" parameterType="ImageDTO">
+        INSERT INTO images (boardId, orginName, saveName, path, sequence)
+        VALUES (#{boardId}, #{orginName}, #{saveName}, #{path}, #{sequence});
+    </insert>
+
+    <!-- 파일 조회 -->
+    <select id="viewImg" parameterType="int" resultType="String">
+        SELECT saveName FROM images WHERE boardId = #{postId};
+    </select>
+
 </mapper>

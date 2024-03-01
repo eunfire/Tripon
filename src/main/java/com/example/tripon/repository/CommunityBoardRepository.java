@@ -2,7 +2,7 @@ package com.example.tripon.repository;
 
 import com.example.tripon.dto.BoardDTO;
 import com.example.tripon.dto.CommentDTO;
-import com.example.tripon.dto.LikeDTO;
+import com.example.tripon.dto.ImageDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,21 +46,29 @@ public class CommunityBoardRepository {
     }
 
     // 글쓰기저장
-    public  void addPost(BoardDTO boardDTO) {
+    public  int addPost(BoardDTO boardDTO) {
         sql.insert("free.addPost", boardDTO);
+        return boardDTO.getBoardId();
     }
 
     // 게시글 수정
-    public void editPost(BoardDTO updatedPost) {
-        sql.update("free.editPost", updatedPost);
+    public void editPost(BoardDTO boardDTO) {
+        sql.update("free.editPost", boardDTO);
     }
 
+    // 댓글 조회
     public List<CommentDTO> getCommentsByPostId(int postId) {
         return sql.selectList("free.getCommentsByPostId", postId);
     }
 
+    // 댓글 등록
     public void addComment(CommentDTO comment) {
         sql.insert("free.addComment", comment);
+    }
+
+    // 대댓글 등록
+    public void add_comment(CommentDTO comment) {
+        sql.insert("free.add_comment", comment);
     }
 
     // 좋아요 수 조회
@@ -95,4 +103,44 @@ public class CommunityBoardRepository {
         // 결과가 없을 경우 null을 반환하므로, null이 아닐 때는 true를 반환하도록 한다.
         return sql.selectOne("free.getIsLiked", params);
     }
+
+    // 댓글 삭제
+    public void deleteCommentById(int bcId) {
+        sql.delete("free.deleteCommentById", bcId);
+    }
+
+    //댓글 삭제 업데이트
+    public void updateDeleteComment(int bcId) {
+        sql.update("free.updateDeleteComment", bcId);
+    }
+
+    public boolean searchParentId(int bcId) {
+        List<Object> result = sql.selectList("free.searchParentId", bcId);
+        return !result.isEmpty();
+    }
+
+    // 삭제 여부 확인
+    public boolean deletedComment(int bcId) {
+        return sql.selectOne("free.deletedComment", bcId);
+    }
+
+    public Integer searchParentBcId(int bcId) {
+        return sql.selectOne("free.searchParentBcId", bcId);
+    }
+
+    // 댓글 수정
+    public void editComment(CommentDTO commentDto) {
+        sql.update("free.editComment", commentDto);
+    }
+
+    // 파일 저장
+    public void saveFile(ImageDTO imageDTO) {
+        sql.insert("free.saveFile", imageDTO);
+    }
+
+    // 파일 조회
+    public List<ImageDTO> viewImg(int postId) {
+        return sql.selectList("free.viewImg", postId);
+    }
+
 }

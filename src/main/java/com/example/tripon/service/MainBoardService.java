@@ -25,4 +25,8 @@ public class MainBoardService {
     public List<BoardDTO> searchPostsByTitle(String title, int startIndex, int pageSize) {
         return mainBoardRepository.searchPostsByTitle(title, startIndex, pageSize);
     }
+
+    public List<BoardDTO> likeBoard(int startIndex, int pageSize) {
+        return mainBoardRepository.likeBoard(startIndex, pageSize);
+    }
 }

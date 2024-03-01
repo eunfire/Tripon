@@ -21,4 +21,16 @@
         ORDER BY boardId DESC
             LIMIT #{startIndex}, #{pageSize};
     </select>
+
+    <!-- 인기글 조회 -->
+    <select id="likeBoard" resultType="boardDTO">
+        SELECT b.*
+        FROM board b
+                 LEFT JOIN (
+            SELECT boardId, COUNT(*) AS likeCount
+            FROM like_table
+            GROUP BY boardId
+        ) AS likes ON b.boardId = likes.boardId
+        ORDER BY COALESCE(likes.likeCount, 0) DESC, b.views DESC LIMIT #{startIndex}, #{pageSize};
+    </select>
 </mapper>

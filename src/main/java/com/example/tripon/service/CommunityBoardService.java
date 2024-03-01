@@ -2,7 +2,7 @@ package com.example.tripon.service;
 
 import com.example.tripon.dto.BoardDTO;
 import com.example.tripon.dto.CommentDTO;
-import com.example.tripon.dto.LikeDTO;
+import com.example.tripon.dto.ImageDTO;
 import com.example.tripon.repository.CommunityBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,21 +41,28 @@ public class CommunityBoardService {
     }
 
     // 글저장
-    public void addPost(BoardDTO boardDTO) {
-        communityBoardRepository.addPost(boardDTO);
+    public int addPost(BoardDTO boardDTO) {
+        return communityBoardRepository.addPost(boardDTO);
     }
 
     // 게시글 수정
-    public void editPost(BoardDTO updatedPost) {
-        communityBoardRepository.editPost(updatedPost);
+    public void editPost(BoardDTO boardDTO) {
+        communityBoardRepository.editPost(boardDTO);
     }
 
+    // 댓글 조회
     public List<CommentDTO> getCommentsByPostId(int postId) {
         return communityBoardRepository.getCommentsByPostId(postId);
     }
 
+    // 댓글 등록
     public void addComment(CommentDTO comment) {
         communityBoardRepository.addComment(comment);
+    }
+
+    // 대댓글 등록
+    public void add_comment(CommentDTO comment) {
+        communityBoardRepository.add_comment(comment);
     }
 
     // 좋아요 수 조회
@@ -77,4 +84,41 @@ public class CommunityBoardService {
        return communityBoardRepository.getIsLiked(postId, memId);
     }
 
+   // 댓글 삭제
+    public void deleteCommentById(int bcId) {
+        communityBoardRepository.deleteCommentById(bcId);
+    }
+
+    // 댓글 삭제 업데이트
+    public void updateDeleteComment(int bcId) {
+        communityBoardRepository.updateDeleteComment(bcId);
+    }
+
+    public boolean searchParentId(int bcId) {
+        return communityBoardRepository.searchParentId(bcId);
+    }
+
+    // 삭제 여부 확인
+    public boolean deletedComment(int bcId) {
+        return communityBoardRepository.deletedComment(bcId);
+    }
+
+    public Integer searchParentBcId(int bcId) {
+        return communityBoardRepository.searchParentBcId(bcId);
+    }
+
+    // 댓글 수정
+    public void editComment(CommentDTO commentDto) {
+        communityBoardRepository.editComment(commentDto);
+    }
+
+    // 파일 저장
+    public void saveFile(ImageDTO imageDTO) {
+        communityBoardRepository.saveFile(imageDTO);
+    }
+
+    // 파일 조회
+    public List<ImageDTO> viewImg(int postId) {
+        return communityBoardRepository.viewImg(postId);
+    }
 }

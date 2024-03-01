@@ -13,4 +13,5 @@ public class ImageDTO {
     private String orginName;
     private String saveName;
     private String path;
+    private int sequence;
 }

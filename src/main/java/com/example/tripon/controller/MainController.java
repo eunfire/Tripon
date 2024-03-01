@@ -22,8 +22,10 @@ public class MainController {
 
         // 전체 게시글 목록을 조회
         List<BoardDTO> allPosts = mainBoardService.getAllPosts(startIndex, pageSize);
-
         model.addAttribute("posts", allPosts);
+
+        List<BoardDTO> likeBoard = mainBoardService.likeBoard(startIndex, pageSize);
+        model.addAttribute("likeboard", likeBoard);
 
         // 현재 페이지 번호와 총 페이지 수 계산하여 모델에 추가
         int totalPosts = mainBoardService.getAllPostCount();
@@ -93,8 +95,27 @@ public class MainController {
         return "/newest-board";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "/test";
+    @GetMapping("/likePost")
+    public String likeBoard(@RequestParam(defaultValue = "1") int page, Model model) {
+        int pageSize = 10; // 페이지당 게시글 수
+        int startIndex = (page - 1) * pageSize;
+
+        List<BoardDTO> likeBoard = mainBoardService.likeBoard(startIndex, pageSize);
+        model.addAttribute("posts", likeBoard);
+
+        int totalPosts = mainBoardService.getAllPostCount();
+        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        // 페이징 숫자 범위 계산
+        int pagesToShow = 10; // 10 페이지까지 표시
+        int startPage = Math.max(1, page - (pagesToShow / 2));
+        int endPage = Math.min(totalPages, startPage + pagesToShow - 1);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return "/like-board";
     }
 }

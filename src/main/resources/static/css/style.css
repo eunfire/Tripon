@@ -138,6 +138,11 @@ body {
   padding: 10px 0;
 }
 
+.info3 {
+  border-bottom: 2px solid #f0f0f0;
+
+}
+
 .info2_left {
   font-size: 1.1rem;
   padding: 0 20px;
@@ -187,6 +192,14 @@ body {
   justify-content: flex-end;
   gap: 0.5rem;
   margin: 25px 0;
+}
+
+.board_views {
+  padding: 1px 15px;
+  /* border-bottom: 1px solid #999; */
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #b3b3b3;
 }
 
 .editButton,
@@ -484,6 +497,7 @@ textarea {
   flex-wrap: nowrap;
   margin: 0 auto;
   padding-bottom: 25px;
+  padding-left: 25px;
 }
 
 .comment > li {
@@ -514,8 +528,9 @@ textarea {
 .comment_board {
   display: block;
   position: relative;
-  width: 400px;
+  width: 1050px;
   height: 100%;
+  padding-left: 10px;
   padding-right: 25px;
   line-height: 29px;
   border: 1px solid #BDBDBD;
@@ -523,6 +538,8 @@ textarea {
   font-size: 15px;
   box-sizing: border-box;
   z-index: 10;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .comment_button {
@@ -535,6 +552,222 @@ textarea {
   background: #0e52ea;
   color: #fff;
   font-size: 14px;
+}
+
+.comment1 {
+  margin-top: 25px;
+}
+
+.comments11{
+  padding: 20px;
+  margin-top: 25px;
+  background-color: #F6F6F6;
+}
+
+.comment2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  padding-left: 25px;
+}
+
+.commentDelete {
+  display: inline-block;
+  width: 1120px;
+  height: 20px;
+  position: relative;
+  color: #000000;
+}
+
+.commentDelete2 {
+  display: inline-block;
+  width: 1050px;
+  height: 20px;
+  position: relative;
+  color: #000000;
+}
+
+.commentDelete_2 {
+  position: absolute;
+  height: 20px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: #000000;
+}
+
+.comment10 {
+  font-size: 20px;
+}
+
+.editComments {
+  margin: 0 auto;
+  padding-bottom: 25px;
+  padding-left: 50px;
+}
+
+.comment_board1 {
+  position: relative;
+  width: 1050px;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 25px;
+  line-height: 29px;
+  border: 1px solid #BDBDBD;
+  background: #fff;
+  font-size: 15px;
+  box-sizing: border-box;
+  z-index: 10;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.comments_board1 {
+  position: relative;
+  width: 950px;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 25px;
+  line-height: 29px;
+  border: 1px solid #BDBDBD;
+  background: #F6F6F6;
+  font-size: 15px;
+  box-sizing: border-box;
+  z-index: 10;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.comment_button1 {
+  width: 9%;
+  padding:18px 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border:none;
+  background: #0e52ea;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* 대댓글 */
+.comments {
+  margin: 0 auto;
+  padding-bottom: 25px;
+  padding-left: 50px;
+}
+
+.comments > li {
+  margin-top: 20px;
+}
+
+#comments {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.commentsNick {
+  font-size: 20px;
+}
+
+.comments-form > form > h4 {
+  width:100%;
+  margin: 14px 0 14px 0;
+}
+
+.comments-content {
+  cursor:pointer;
+  word-break: break-all;
+  padding-right: 25px;
+}
+
+.comments_list > input {
+  outline: none;
+}
+
+.comments_board {
+  display: block;
+  position: relative;
+  width: 1000px;
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 25px;
+  line-height: 29px;
+  border: 1px solid #BDBDBD;
+  background: #fff;
+  font-size: 15px;
+  box-sizing: border-box;
+  z-index: 10;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.comments-form {
+  display: block;
+}
+
+
+
+.comments_button {
+  width: 9%;
+  padding:18px 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border:none;
+  background: #0e52ea;
+  color: #fff;
+  font-size: 14px;
+}
+
+.comments1 {
+  padding-top: 25px;
+  font-size: 20px;
+}
+
+.comments2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  padding-left: 25px;
+}
+
+.comments0 {
+  background-color: #fff;
+  color: #000;
+  font-size: 15px;
+  padding: 8px 19px;
+  border: none;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: background-color;
+  margin-top: 4px;
+ }
+
+.comments01 {
+  background-color: #F6F6F6;
+  color: #000;
+  font-size: 15px;
+  padding: 8px 19px;
+  border: none;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: background-color;
+  margin-top: 4px;
+}
+
+.commentContent {
+  color: #4C4C4C;
+  margin-top: 10px;
+}
+
+.commentDate {
+  color: #A6A6A6;
 }
 
 /* 좋아요 */

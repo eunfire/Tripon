@@ -14,5 +14,6 @@ public class CommentDTO {
     private String nick;
     private LocalDateTime bcDate, bcUpdate;
     private String bcContent;
-    private int parent_id;
+    private int parentId;
+    private boolean deleted;
 }

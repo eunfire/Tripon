@@ -27,11 +27,20 @@ public class MainBoardRepository {
         return sql.selectOne("main.getAllPostCount");
     }
 
+    // 검색
     public List<BoardDTO> searchPostsByTitle(String title, int startIndex, int pageSize) {
         Map<String, Object> params = new HashMap<>();
         params.put("title", title);
         params.put("startIndex", startIndex);
         params.put("pageSize", pageSize);
         return sql.selectList("main.searchPostsByTitle", params);
+    }
+
+    // 좋아요
+    public List<BoardDTO> likeBoard(int startIndex, int pageSize) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("startIndex", startIndex);
+        params.put("pageSize", pageSize);
+        return sql.selectList("main.likeBoard", params);
     }
 }

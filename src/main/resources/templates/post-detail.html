@@ -14,6 +14,29 @@
 	<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
 	<script th:src="@{/js/navbar.js}" defer></script>
 	<script th:src="@{/js/Like.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$("#writeReply").click(function() {
+				$("#comments").css("display", "flex");
+			})
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#editReply").click(function() {
+				$(this).siblings("form#editComment").toggle();
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#editReplys").click(function() {
+				$(this).siblings("form#editComments").toggle();
+			});
+		});
+	</script>
 <title>게시물 상세 페이지</title>
 </head>
 
@@ -94,43 +117,126 @@
 									<button class="goBackButton" id="goBackButton">목록</button>
 								</div>
 							</main>
-
+							<div class="board_views"></div>
 							<div class="Reply_div"></div>
+
 
 
 							<ul class="comment">
 								<li class="comment-form">
+									<form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
 									<form id="comment">
 										<h4>댓글<span></span></h4>
-										<span class="comment_list">
-											<input type="text" placeholder="댓글 내용을 입력해주세요." class="comment_board" name="content"/>
+											<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
+											<span class="comment_list">
+											<input type="text" placeholder="댓글 내용을 입력해주세요." class="comment_board" name="bcContent"/>
 										</span>
-										<input type="submit" class="comment_button" value="댓글 등록">
+										<input type="submit" class="comment_button" th:href="@{/Local/writer}" value="댓글 등록">
+										</form>
+									</form>
+								</li>
+							</ul>
+							<ul class="comment">
+								<li class="comment-form">
+									<form id="comment1">
+											<span class="comment_list">
+											<input type="text"
+												   placeholder="댓글을 작성할려면 로그인이 필요합니다."
+												   th:unless="${#authorization.expression('isAuthenticated()')}"
+												   class="comment_board"
+												   name="bcContent"
+												   onclick="window.location.href='/sign/signin';"/>
+										</span>
+										<input type="submit" class="comment_button" onclick="window.location.href='/sign/signin';" value="댓글 등록" th:unless="${#authorization.expression('isAuthenticated()')}">
 									</form>
 								</li>
 							</ul>
 
-
-
-
-
+							<div th:each="image : ${images}">
+								<img th:src="@{'/upload/' + ${image}}" />
+							</div>
 
 							<!-- 댓글 목록을 보여주는 부분 -->
-							<ul th:each="comment : ${comments}">
-								<li>
-									<span th:text="${comment.nick}"></span>
-									<span th:text="${comment.bcDate}"></span>
-									<p th:text="${comment.bcContent}"></p>
+							<ul th:each="comment : ${comments}" th:if="${comment.parentId == 0}">
+								<li class="comment1">
+
+									<div class="comment10" th:if="${comment.deleted}">삭제된 댓글입니다.</div>
+									<div class="comment10" th:if="${!comment.deleted}">
+									<span class="commentsNick" th:text="${comment.nick}"></span>
+									<div th:if="${user != null && comment.nick == user.nick}" class="commentDelete">
+										<form th:action="@{/Community/post/{postId}/comments/delete(postId=${postId}, bcId=${comment.bcId})}" method="post">
+										<button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">
+											<svg class="commentDelete_2" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/>
+											</svg>
+										</button>
+										</form>
+									</div>
+									<p class="commentContent" th:text="${comment.bcContent}"></p>
+									<span class="commentDate" th:text="${comment.bcDate}"></span>
+									<button class="comments0" id="editReply" th:if="${user != null && comment.nick == user.nick}">수정</button>
+									<button class="comments0" id="writeReply">답글 쓰기</button>
+
+										<!-- 수정하기 -->
+										<form id="editComment" th:if="${#authorization.expression('isAuthenticated()')}" method="post" th:action="@{/Community/post/{postId}/comments/edit(postId=${postId}, bcId=${comment.bcId})}" style="display: none;">
+    									<span class="comments_list">
+        								<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
+        								<input type="hidden" name="parentId" th:value="${comment.bcId}">
+        								<input type="text" class="comment_board1" th:value="${comment.bcContent}" name="bcContent"/>
+										</span>
+											<input type="submit" class="comment_button1" value="댓글 수정">
+										</form>
+
+									<!-- 답글 쓰기 -->
+									<form id="comments" th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
+												<span class="comments_list">
+												<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
+										<input type="hidden" name="parentId" th:value="${comment.bcId}">
+											<input type="text" placeholder="답글 내용을 입력해주세요." class="comments_board" name="bcContent"/>
+										</span>
+										<input type="submit" class="comments_button" value="답글 등록">
+									</form>
+									</div>
+
+									<!-- 대댓글 -->
+									<ul class="comments">
+										<li class="comments-form">
+
+
+											<!-- 대댓글 목록을 보여주는 부분-->
+											<ul th:each="reple : ${comments}" th:if="${comment.bcId == reple.parentId}">
+												<li class="comments11">
+													<span class="commentsNick" th:text="${reple.nick}"></span>
+													<div th:if="${user != null && comment.nick == user.nick}" class="commentDelete2">
+														<form th:action="@{/Community/post/{postId}/comments/delete(postId=${postId}, bcId=${reple.bcId})}" method="post">
+															<button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">
+																<svg class="commentDelete_2" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+																	<path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/>
+																</svg>
+															</button>
+														</form>
+													</div>
+													<p class="commentContent" th:text="${reple.bcContent}"></p>
+													<span class="commentDate" th:text="${reple.bcDate}"></span>
+													<button class="comments01" id="editReplys" th:if="${user != null && reple.nick == user.nick}">수정</button>
+
+													<!-- 수정하기 -->
+													<form id="editComments" th:if="${#authorization.expression('isAuthenticated()')}" method="post" th:action="@{/Community/post/{postId}/comments/edit(postId=${postId}, bcId=${reple.bcId})}" style="display: none;">
+    												<span class="comments_list">
+        											<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
+        											<input type="hidden" name="parentId" th:value="${comment.bcId}">
+        											<input type="text" class="comments_board1" th:value="${reple.bcContent}" name="bcContent"/>
+													</span>
+														<input type="submit" class="comment_button1" value="답글 수정">
+													</form>
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<div class="info3"></div>
 								</li>
 							</ul>
 
-							<!-- 댓글 입력 폼 -->
-							<form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
-								<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
-								<textarea name="bcContent" placeholder="댓글을 입력해주세요."></textarea>
-								<button th:href="@{/Local/writer}" class="on">댓글 등록</button>
-							</form>
-							<a th:unless="${#authorization.expression('isAuthenticated()')}" href="/sign/signin">댓글을 작성할려면 로그인이 필요합니다.</a>
 						</div>
 					</div>
 				</section>

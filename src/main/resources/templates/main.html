@@ -62,37 +62,20 @@
 
 					<div class="idx_board">
 						<div class="title">
-							<a href="PopularPosts.html" class="name">인기글</a> <a
-								href="PopularPosts.html" class="more"> <img th:src="@{/img/more.png}"
+							<a th:href="@{/likePost}" class="name">인기글</a> <a
+								th:href="@{/likePost}" class="more"> <img th:src="@{/img/more.png}"
 								alt="더 보기"/>
 							</a>
 						</div>
 						<div class="list">
 							<ul>
-								<li><a href="world-culture-board.html"> <img
-										src="img/number/num1.png">그린델발트 호텔 추천-Alpin Hotel Bort
-								</a> <span>2023-01-01</span></li>
-								<li><a href="world-culture-board.html"> <img
-										src="img/number/num2.png">에미레이트 부분 취소 후기
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num3.png">파리 쇼핑 관련해서 질문드립니다.
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num4.png">파리 생테노레 거리서 소매치기 당함
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num5.png">[모로코]주차와 도로 주행시 유의 상황
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num6.png">노르웨이 페리
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num7.png">누워서 유럽여행 했습니다!
-								</a> <span>2023-01-01</span></li>
-								<li><a href="free-board.html"> <img
-										src="img/number/num8.png">2만보 걸어도 편한 여행신발 르무통
-								</a> <span>2023-01-01</span></li>
+								<li th:each="likeboard, stat : ${likeboard}">
+									<a th:href="@{/Community/post/{postId}(postId=${likeboard.boardId})}">
+										<!-- 숫자 이미지를 추가 -->
+										<img th:src="@{|/img/number/num${stat.index + 1}.png|}" th:text="${likeboard.title}" />
+									</a>
+									<span th:text="${#temporals.format(likeboard.createdTime, 'yyyy.MM.dd')}"></span>
+								</li>
 							</ul>
 						</div>
 					</div>
