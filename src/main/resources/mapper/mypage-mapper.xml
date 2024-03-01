@@ -99,4 +99,9 @@
         WHERE nick = #{nick}
           AND bcContent LIKE CONCAT('%', #{search}, '%');
     </select>
+
+    <!-- 회원 삭제 -->
+    <delete id="deleteMember" parameterType="String">
+        DELETE FROM member WHERE memId = #{memId};
+    </delete>
 </mapper>

@@ -103,4 +103,7 @@ public class MypageService {
     }
 
 
+    public void deleteMember(String memId) {
+        repo.deleteMember(memId);
+    }
 }

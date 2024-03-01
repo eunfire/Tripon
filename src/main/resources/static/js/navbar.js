@@ -55,7 +55,6 @@ document.addEventListener('scroll', () => {
 	}
 });
 
-
 overseasBtn.addEventListener('mouseover', () => {
 	innerOverseas.classList.toggle('active');
 	innerDomsestic.classList.remove('active');
@@ -98,7 +97,6 @@ document.addEventListener('scroll', () => {
 	}
 });
 
-
 questionfreeBtn.addEventListener('mouseover', () => {
 	innerQuestionfree.classList.toggle('active');
 	innerDomsestic.classList.remove('active');
@@ -140,7 +138,6 @@ document.addEventListener('scroll', () => {
 		innerQuestionfree.classList.remove('active');
 	}
 });
-
 
 innernoticeBtn.addEventListener('mouseover', () => {
 	innerNotice.classList.toggle('active');

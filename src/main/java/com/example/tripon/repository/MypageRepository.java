@@ -100,4 +100,8 @@ public class MypageRepository {
         params.put("nick", nick);
         return sql.selectOne("mypage.searchMyReplyCount", params);
     }
+
+    public void deleteMember(String memId) {
+        sql.delete("mypage.deleteMember", memId);
+    }
 }

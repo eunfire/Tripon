@@ -41,51 +41,89 @@ body {
     text-align: center;
 }
 
-.id{
+.Signup{
     font-size : 15px;
-    margin-bottom: 10px;
+    width: 405px;
+    height: 60px;
+    border-radius: 10px;
+    border: 3px solid #828282;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+input {
+    width : 400px;
+    height: 60px;
+    border-radius: 10px;
+    margin : 0;
+    border: 0;
+    outline: none;
+    font-size: 25px;
+    padding-left: 5px;
+}
+
+p{
+    font-size : 20px;
+    margin-bottom: 15px;
     color :#323232;
-}
-
-.pw{
-    font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232; 
-}
-
-.checkpw{
-    font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232; 
-}
-
-.name{
-    font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232; 
-}
-
-.nickname{
-    font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232; 
 }
 
 .email{
     font-size : 15px;
-    margin-bottom: 10px;
-    color :#323232; 
-}
-
-input{
-    width : 400px;
+    width: 405px;
     height: 60px;
     border-radius: 10px;
-    font-size: 25px;
-    color: #000000;
     border: 3px solid #828282;
-    margin-top: 10px;
-    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+#email, #code {
+    width : 340px;
+}
+
+#emailbtn{
+    font-size : 15px;
+    float: right;
+    border-radius: 0 10px 10px 0;
+    border: 3px solid #0020ff;
+    height: 66px;
+    width: 55px;
+    margin-right: -3px;
+    margin-top: -3px;
+    cursor: pointer;
+    background-color: #0020ff;
+    color : #FAEBCD;
+    font-weight: bolder;
+}
+
+#checkCode{
+    display: none;
+}
+
+#codebtn{
+    font-size : 15px;
+    float: right;
+    border-radius: 0 10px 10px 0;
+    border: 3px solid #0020ff;
+    height: 66px;
+    width: 55px;
+    margin-right: -3px;
+    margin-top: -3px;
+    cursor: pointer;
+    background-color: #0020ff;
+    color : #FAEBCD;
+    font-weight: bolder;
+}
+
+#emailbtn:hover {
+    background-color: #0018cc;
+}
+
+#emailbtn:active {
+    background-color: #c1c5ff;
+    border: 3px solid #828282;
+    color :#323232;
 }
 
 input:focus::placeholder {
@@ -101,7 +139,16 @@ input:focus::placeholder {
     color : #FAEBCD;
     font-size: 20px;
     font-weight: bolder;  
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+}
+
+.btn button:hover {
+    background-color: #0018cc;
+}
+
+.btn button:active {
+    background-color: #c1c5ff;
+    color :#323232;
 }
 
 .failure-message, .duplicate-message, .success-message {
@@ -118,3 +165,6 @@ input:focus::placeholder {
     color: #0020ff;
 }
 
+#MyTimer {
+    display: none;
+}

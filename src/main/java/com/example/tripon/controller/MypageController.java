@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -195,5 +192,30 @@ public class MypageController {
         }
 
         return "mypage-reply";
+    }
+
+    // 회원 탈퇴
+    @GetMapping("/delete")
+    public String myInfoDelete() {
+        return "mypage-leave";
+    }
+
+    // 회원 탈퇴 프로세스
+    @PostMapping("/deleteProcess")
+    public String myInfoDeleteProcess(Principal principal, String pw, Model model) {
+        // 로그인한 사용자 아이디 가져오기
+        String memId = principal.getName();
+
+        // 탈퇴 전 비밀번호 확인
+        boolean isValidPw = mypageService.pwChecked(memId, pw);
+
+        // 비밀번호 확인 여부에 따라 회원 삭제 또는 비밀번호 재확인
+        if (isValidPw) {
+            mypageService.deleteMember(memId);
+            return "redirect:/logout";
+        } else {
+            model.addAttribute("isValidPw", false);
+            return "mypage-leave";
+        }
     }
 }
