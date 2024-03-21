@@ -782,3 +782,80 @@ textarea {
   color: #000000;
   margin-left: 5px;
 }
+
+
+/* 이미지 파일 */
+:root {
+  --bgColor: #3a3a3a;
+  --hoverBg: #616161;
+  --text: #bbb;
+}
+
+.container {
+  width: clamp(0px, 100%, 512px);
+  margin: 32px auto;
+  text-align: center;
+}
+
+.label {
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+  cursor: pointer;
+  background-color: var(--bgColor);
+}
+
+.inner {
+  width: 500px;
+  height: 120px;
+  margin: 64px auto;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 120px;
+  background-color: var(--bgColor);
+  color: var(--text);
+}
+
+@media (any-hover: hover){
+  .inner:hover{
+    background-color: var(--hoverBg);
+  }
+}
+
+.label--hover{
+  background-color: var(--hoverBg);
+}
+
+.preview-title{
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  align-items: center;
+  background-color: var(--bgColor);
+}
+
+.embed-img{
+  width: 100%;
+  height: 128px;
+  object-position: center;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* 이미지 간 간격 조절 */
+}
+.image-preview {
+  width: 200px; /* 이미지 미리보기의 기본 너비 */
+  height: auto; /* 가로 비율 유지를 위해 높이 자동 조정 */
+}

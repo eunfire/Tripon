@@ -24,4 +24,5 @@ public class BoardDTO {
     private LocalDateTime editTime;
 
     private String nick;
+    private String cateName;
 }
