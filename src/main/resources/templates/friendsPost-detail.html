@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
-	rel="stylesheet">
+	<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+	<link
+			th:href="@{https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap}"
+			rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/detail.css}">
 	<link rel="stylesheet" th:href="@{/css/nav.css}">
-	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/cardlist.css}">
 	<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
-	<script th:src="@{/js/navbar.js}" defer></script>
 	<script th:src="@{/js/Like.js}"></script>
+	<script th:src="@{/js/navbar.js}" defer></script>
 	<script>
 		$(document).ready(function() {
 			$("#writeReply").click(function() {
@@ -54,45 +56,77 @@
 								<h1 th:text="${post.cateName}"></h1>
 								<div class="back-to-board-wrapper" onclick="history.back()">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-										viewBox="0 0 24 24">
-                <path
-											d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-              </svg>
+										 viewBox="0 0 24 24">
+										<path
+												d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+									</svg>
 								</div>
 							</div>
 							<main class="main">
 								<div class="board_view_wrap">
 									<div class="board_view">
-										<div class="title" th:text="${post.title}"></div>
+											<div class="title" th:text="${post.title}"></div>
+											<div class="info2">
+												<div class="info2_left">
+													<dl>
+														<dt>여행 기간</dt>
+														<dd th:text="${post.tStart} + ' ~ ' + ${post.tEnd}"></dd>
+													</dl>
+													<dl>
+														<dt>모집 인원</dt>
+														<dd>3명</dd>
+													</dl>
+												</div>
+
+												<div class="info2_right">
+													<dl>
+														<dt><span th:text="${post.nick}"></span></dt>
+													</dl>
+
+													<dl>
+														<dt><span th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></span></dt>
+
+													</dl>
+
+													<dl>
+														<dt><span th:text="${post.views}"></span></dt>
+													</dl>
+												</div>
+											</div>
+
+										<div class="cont" th:text="${post.content}"></div>
+
 										<div class="info2">
 
-											<div class="info2_right">
-												<dl>
-													<dt><span th:text="${post.nick}"></span></dt>
-												</dl>
+											<div class="idx_board_wrap">
+												<div>
 
-												<dl>
-													<dt><span th:text="${#temporals.format(post.createdTime, 'yyyy.MM.dd')}"></span></dt>
+													<div class="idx_board">
+														<div class="list">
+															<div>날씨</div>
+														</div>
+													</div>
 
-												</dl>
+													<div class="idx_board">
+														<div class="list">
+															<div>지도</div>
+														</div>
+													</div>
 
-												<dl>
-													<dt><span th:text="${post.views}"></span></dt>
-												</dl>
+												</div>
 											</div>
 										</div>
 
-										<div class="cont" th:text="${post.content}"></div>
 									</div>
 								</div>
 								<div class="post-actions">
 									<div class="like">
-									<svg th:if="${isliked == 1}" th:data-postid="${postId}" th:data-isliked="${isliked}" class="fullHeart" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill="red" fill-rule="nonzero"/>
-									</svg>
-									<svg th:if="${isliked == 0}" th:data-postid="${postId}" th:data-isliked="${isliked}" class="emptyHeart" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path d="m7.234 3.004c-2.652 0-5.234 1.829-5.234 5.177 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-3.353-2.58-5.168-5.229-5.168-1.836 0-3.646.866-4.771 2.554-1.13-1.696-2.935-2.563-4.766-2.563zm0 1.5c1.99.001 3.202 1.353 4.155 2.7.14.198.368.316.611.317.243 0 .471-.117.612-.314.955-1.339 2.19-2.694 4.159-2.694 1.796 0 3.729 1.148 3.729 3.668 0 2.671-2.881 5.673-8.5 11.127-5.454-5.285-8.5-8.389-8.5-11.127 0-1.125.389-2.069 1.124-2.727.673-.604 1.625-.95 2.61-.95z" fill="red" fill-rule="nonzero"/>
-									</svg>
+										<svg th:if="${isliked == 1}" th:data-postid="${postId}" th:data-isliked="${isliked}" class="fullHeart" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill="red" fill-rule="nonzero"/>
+										</svg>
+										<svg th:if="${isliked == 0}" th:data-postid="${postId}" th:data-isliked="${isliked}" class="emptyHeart" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path d="m7.234 3.004c-2.652 0-5.234 1.829-5.234 5.177 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-3.353-2.58-5.168-5.229-5.168-1.836 0-3.646.866-4.771 2.554-1.13-1.696-2.935-2.563-4.766-2.563zm0 1.5c1.99.001 3.202 1.353 4.155 2.7.14.198.368.316.611.317.243 0 .471-.117.612-.314.955-1.339 2.19-2.694 4.159-2.694 1.796 0 3.729 1.148 3.729 3.668 0 2.671-2.881 5.673-8.5 11.127-5.454-5.285-8.5-8.389-8.5-11.127 0-1.125.389-2.069 1.124-2.727.673-.604 1.625-.95 2.61-.95z" fill="red" fill-rule="nonzero"/>
+										</svg>
 										<span th:text="${likeCount}"></span>
 									</div>
 									<button class="editButton" id="editButton">
@@ -114,13 +148,13 @@
 							<ul class="comment">
 								<li class="comment-form">
 									<form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
-									<form id="comment">
-										<h4>댓글<span></span></h4>
+										<form id="comment">
+											<h4>댓글<span></span></h4>
 											<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
 											<span class="comment_list">
 											<input type="text" placeholder="댓글 내용을 입력해주세요." class="comment_board" name="bcContent"/>
 										</span>
-										<input type="submit" class="comment_button" th:href="@{/Local/writer}" value="댓글 등록">
+											<input type="submit" class="comment_button" th:href="@{/Local/writer}" value="댓글 등록">
 										</form>
 									</form>
 								</li>
@@ -151,20 +185,20 @@
 
 									<div class="comment10" th:if="${comment.deleted}">삭제된 댓글입니다.</div>
 									<div class="comment10" th:if="${!comment.deleted}">
-									<span class="commentsNick" th:text="${comment.nick}"></span>
-									<div th:if="${user != null && comment.nick == user.nick}" class="commentDelete">
-										<form th:action="@{/Community/post/{postId}/comments/delete(postId=${postId}, bcId=${comment.bcId})}" method="post">
-										<button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">
-											<svg class="commentDelete_2" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/>
-											</svg>
-										</button>
-										</form>
-									</div>
-									<p class="commentContent" th:text="${comment.bcContent}"></p>
-									<span class="commentDate" th:text="${comment.bcDate}"></span>
-									<button class="comments0" id="editReply" th:if="${user != null && comment.nick == user.nick}">수정</button>
-									<button class="comments0" id="writeReply">답글 쓰기</button>
+										<span class="commentsNick" th:text="${comment.nick}"></span>
+										<div th:if="${user != null && comment.nick == user.nick}" class="commentDelete">
+											<form th:action="@{/Community/post/{postId}/comments/delete(postId=${postId}, bcId=${comment.bcId})}" method="post">
+												<button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">
+													<svg class="commentDelete_2" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+														<path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/>
+													</svg>
+												</button>
+											</form>
+										</div>
+										<p class="commentContent" th:text="${comment.bcContent}"></p>
+										<span class="commentDate" th:text="${comment.bcDate}"></span>
+										<button class="comments0" id="editReply" th:if="${user != null && comment.nick == user.nick}">수정</button>
+										<button class="comments0" id="writeReply">답글 쓰기</button>
 
 										<!-- 수정하기 -->
 										<form id="editComment" th:if="${#authorization.expression('isAuthenticated()')}" method="post" th:action="@{/Community/post/{postId}/comments/edit(postId=${postId}, bcId=${comment.bcId})}" style="display: none;">
@@ -176,15 +210,15 @@
 											<input type="submit" class="comment_button1" value="댓글 수정">
 										</form>
 
-									<!-- 답글 쓰기 -->
-									<form id="comments" th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
+										<!-- 답글 쓰기 -->
+										<form id="comments" th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/Community/post/{postId}/comments(postId=${post.boardId})}" method="post">
 												<span class="comments_list">
 												<input type="hidden" name="nick" th:value="${#authentication.principal.nick}">
 										<input type="hidden" name="parentId" th:value="${comment.bcId}">
 											<input type="text" placeholder="답글 내용을 입력해주세요." class="comments_board" name="bcContent"/>
 										</span>
-										<input type="submit" class="comments_button" value="답글 등록">
-									</form>
+											<input type="submit" class="comments_button" value="답글 등록">
+										</form>
 									</div>
 
 									<!-- 대댓글 -->

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -112,7 +113,6 @@ public class CommunityBoardController {
         List<ImageDTO> images = communityBoardService.viewImg(postId);
         model.addAttribute("images", images);
 
-
         // 댓글 조회
         List<CommentDTO> comments = communityBoardService.getCommentsByPostId(postId);
         model.addAttribute("comments", comments);
@@ -161,7 +161,8 @@ public class CommunityBoardController {
     @PostMapping("/write")
     public String boardWriteForm(@RequestParam String memId, @RequestParam int cateId, @RequestParam String title,
                                  @RequestParam String content, @RequestParam LocalDate tStart,
-                                 @RequestParam LocalDate tEnd, @RequestParam("images") List<MultipartFile> files) {
+                                 @RequestParam LocalDate tEnd, @RequestParam(value = "images", required = false) List<MultipartFile> files,
+                                 RedirectAttributes redirectAttributes) {
 
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setMemId(memId);
@@ -182,6 +183,7 @@ public class CommunityBoardController {
 
 
         // 업로드된 각 파일에 대해 처리
+        if (files != null) {
         for (MultipartFile file : files) {
             System.out.println(file.getOriginalFilename());
             if (file.isEmpty() || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
@@ -226,8 +228,50 @@ public class CommunityBoardController {
                 // 파일 저장 중 에러 발생 시 처리
             }
         }
+    }
 
-        return "redirect:/Local/Information";
+        // 특정 게시판으로 리다이렉션을 위해 cateId를 리다이렉션 속성으로 추가
+        redirectAttributes.addAttribute("cateId", cateId);
+
+        // 해당 게시판 화면으로 리다이렉션
+        if (cateId == 1) {
+            return "redirect:/Community/FreeBoard";
+        } else if (cateId == 2) {
+            return "redirect:/Community/QnaBoard";
+        }
+        else if (cateId == 3) {
+            return "redirect:/Local/Information";
+        }
+        else if (cateId == 4) {
+            return "redirect:/Local/Gyotong";
+        }
+        else if (cateId == 5) {
+            return "redirect:/Local/Friends";
+        }
+        else if (cateId == 6) {
+            return "redirect:/Local/Review";
+        }
+        else if (cateId == 7) {
+            return "redirect:/World/Information";
+        }
+        else if (cateId == 8) {
+            return "redirect:/World/Gyotong";
+        }
+        else if (cateId == 9) {
+            return "redirect:/World/Friends";
+        }
+        else if (cateId == 10) {
+            return "redirect:/World/Review";
+        }
+        else if (cateId == 11) {
+            return "redirect:/notice/notice";
+        }
+        else if (cateId == 12) {
+            return "redirect:/notice/support";
+        }
+        else {
+            return "redirect:/Community/FreeBoard";
+        }
     }
 
     // 수정할 게시글 정보 불러오기
